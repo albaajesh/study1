@@ -3,6 +3,8 @@ package com.infotop.account.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.infotop.account.model.User;
 
 
@@ -12,6 +14,8 @@ import com.infotop.account.model.User;
 public interface UserMapper {
 	Long getId();
 	String getPassword(String userName);
+	public String getUsernameById(@Param("id") int id);
+	public Long getDatagridTotal(User user);
 	User getUser(String userName);
 	User login(Map<String,Object> param);
 	User getUser(Map<String,Object> param);

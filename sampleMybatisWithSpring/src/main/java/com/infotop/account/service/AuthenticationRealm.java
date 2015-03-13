@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.Resource;
+
 import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -38,10 +40,10 @@ public class AuthenticationRealm extends AuthorizingRealm {
 
    // private static final Logger log = LoggerFactory.getLogger(AuthenticationRealm.class);
     
-    @Autowired
-	private UserMapper userMapper;
+	@Autowired
+	private UserService userService;
     
-    @Autowired
+    @Resource
     private RoleMapper roleMapper;
     
     @Override

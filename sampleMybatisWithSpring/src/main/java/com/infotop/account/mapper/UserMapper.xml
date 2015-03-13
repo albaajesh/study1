@@ -42,7 +42,15 @@
     LEFT JOIN user_role ur ON(u.id=ur.user_id)
     LEFT JOIN role r ON(r.id=ur.role_id) where u.name=#{username}
   </select>
-  
+  <select id="getUsernameById" resultType="String">
+		select name as user_name  from user where id = #{id} 
+ </select>
+ 	<select id="getDatagridTotal" resultType="long">
+		select count(1) from user where  1=1
+		<if test="name != null and name != ''">
+            and name like concat('%',#{name},'%')
+        </if>
+	</select>
   <resultMap id="userResult"  type="User"> 
 		<id property="id"  column="id" />
 		<result property="name" column="name"/>
