@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.infotop.account.mapper.UserMapper">
+  
+  <select id="login" parameterType="map" resultType="User">
+    SELECT
+    	id,
+    	name,
+   		password,
+    	create_date
+    FROM user
+    WHERE name = #{name} AND password = #{password}
+  </select>
+  
+  <select id="getPassword" parameterType="String"  resultType="String">
+    SELECT
+   		password 	
+    FROM user
+    WHERE name = #{name}
+  </select>
+  
+  
+  
+
+ 
+  
+  <select id="getUserNameList" resultType="hashmap">
+  	SELECT id,name FROM user
+  </select>
+  
+  <select id="getUser" resultMap="userResult">
+    SELECT
+    	u.id as user_id ,
+    	u.name as user_name,
+    	u.create_date,
+    	r.id as role_id,
+    	r.role_name,
+    	r.description
+    FROM user u
+    LEFT JOIN user_role ur ON(u.id=ur.user_id)
+    LEFT JOIN role r ON(r.id=ur.role_id) where u.name=#{username}
+  </select>
+  
+  <resultMap id="userResult"  type="User"> 
+		<id property="id"  column="id" />
+		<result property="name" column="name"/>
+		<result property="createDate" column="create_date"/>
+		<collection property="roles"  ofType="Role"> 
+			<id property="id"  column="id"/> 
+			<result property="name"  column="role_name"/>
+			<result property="description" column="description"/>
+		</collection> 
+  </resultMap>
+  
+  <insert id="insertUser" parameterType="User" keyProperty="id"
+		useGeneratedKeys="true">
+  	INSERT INTO user (name, password, create_date)
+    VALUES (#{name}, #{password}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  
+  <insert id="insertUserRole" parameterType="map">
+  	INSERT INTO user_role (user_id,role_id)
+    VALUES (#{user_id}, #{role_id})
+  </insert>
+  
+  <update id="updateUser"  parameterType="User"> 
+	UPDATE user
+	<set> 
+		<if test="name != null">name=#{name},</if> 
+		<if test="password != null">password=#{password}</if>
+	</set>
+	WHERE id=#{id} 
+  </update>
+  
+  <update id="updateUserRole"  parameterType="map"> 
+	UPDATE user_role SET
+	role_id=#{role_id}
+	WHERE user_id=#{user_id}
+  </update>
+  
+  <delete id="deleteUser"  parameterType="map">
+  	DELETE FROM user WHERE id=#{id}
+  </delete>
+  
+  <delete id="deleteUserRole"  parameterType="map">
+  	DELETE FROM user_role WHERE user_id=#{user_id}
+  </delete>
+  
+  <update id="changeUserPassword"  parameterType="map"> 
+	UPDATE user SET password=#{newPassword} WHERE id=#{id}
+  </update>
+  
+</mapper>
