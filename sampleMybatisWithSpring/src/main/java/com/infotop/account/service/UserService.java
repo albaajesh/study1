@@ -93,6 +93,11 @@ public class UserService {
 	 */
 	public void edit(User user) {
 		userMapper.updateUser(user);  
+	}
+
+	public String getPassword(String username) {
+		// TODO Auto-generated method stub
+		return userMapper.getPassword(username);
 	}  
     
     

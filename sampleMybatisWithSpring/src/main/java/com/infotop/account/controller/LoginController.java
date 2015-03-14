@@ -17,6 +17,7 @@ public class LoginController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String login() {
+		System.out.println("inside");
 		if (SecurityUtils.getSubject().getSession() != null) {
 			SecurityUtils.getSubject().logout();
 		}

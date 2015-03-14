@@ -69,8 +69,8 @@
 		else{
 			$("#loginForm").show();
 		}
-		/* $("#loginForm").validationEngine();
-	<c:choose>
+		$("#loginForm").validationEngine();
+	/* <c:choose>
 	<c:when test="${fn:contains(shiroLoginFailure,'UnknownAccountException')}">
 			$("#loginForm").validationEngine("showPrompt","该用户不存在","error");
 		</c:when>

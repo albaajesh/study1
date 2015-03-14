@@ -24,6 +24,7 @@
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/login" />
 		<property name="successUrl" value="/home" />
+		<!-- <property name="unauthorizedUrl" value="/WEB-INF/views/error/404.jsp"/> -->
 		<!-- <property name="filters">
 			<map>
 				<entry key="authc" value-ref="captchaFormAuthenticationFilter" />

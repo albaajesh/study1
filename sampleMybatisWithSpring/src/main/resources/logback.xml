@@ -11,7 +11,7 @@
 	<appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>logs/webharvest.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>logs/webharvest.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<fileNamePattern>logs/mybatis.%d{yyyy-MM-dd}.log</fileNamePattern>
 		</rollingPolicy>
 		<encoder>
 			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
@@ -34,7 +34,7 @@
 	</appender>
 
 	<!-- project default level -->
-	<logger name="com.infotop.webharvest" level="INFO" />
+	<logger name="com.infotop.account" level="INFO" />
 	
 	<!-- business log 使用独立的appender，不继承Root的appender -->
 	<logger name="business" level="INFO" additivity="false">
@@ -48,7 +48,7 @@
 	<logger name="org.springside.modules" level="ERROR" />
 	
 	
-	<logger name="org.hibernate" level="ERROR" />
+	<!-- <logger name="org.hibernate" level="ERROR" /> -->
 	
 	<!-- cxf inbound/outbound logger -->
 	<!-- <logger name="org.apache.cxf.services" level="INFO" /> -->

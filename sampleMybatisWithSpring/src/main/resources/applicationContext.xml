@@ -48,8 +48,10 @@
 	<bean class="com.infotop.account.mapper.UserMapper"/>
 	<bean class="com.infotop.account.mapper.RoleMapper"/>
 	
-	 <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
-          p:dataSource-ref="dataSource"/>
+	 <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	 <property name="dataSource" ref="dataSource" />
+	 
+         </bean>
 
 	<!-- 使用annotation定义事务 -->
 	<tx:annotation-driven transaction-manager="transactionManager"
@@ -69,10 +71,12 @@
 	</bean>
 	
 	<!-- MybatisConfigure -->
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" p:dataSource-ref="dataSource"
-          p:configLocation="classpath:mybatis-config.xml"
-          p:mapperLocations="classpath:com/infotop/account/mapper/*.xml"/>
-
+	
+<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="dataSource" ref="dataSource" />
+    <property name="configLocation" value="classpath:mybatis-config.xml" />
+    <property name="mapperLocations" value="classpath:com/infotop/account/mapper/*.xml" />
+</bean>
 
 	<!-- production环境 -->
 	<beans profile="production">
