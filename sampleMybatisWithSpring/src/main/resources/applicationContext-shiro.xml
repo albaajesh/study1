@@ -17,6 +17,7 @@
 
 	<!-- 項目自定义的Realm, 所有accountService依赖的dao都需要用depends-on声明 -->
 	<bean id="shiroDbRealm" class="com.infotop.account.service.AuthenticationRealm">
+		<property name="accountService" ref="accountService" />
 	</bean>
 
 	<!-- Shiro Filter -->
@@ -25,11 +26,11 @@
 		<property name="loginUrl" value="/login" />
 		<property name="successUrl" value="/home" />
 		<!-- <property name="unauthorizedUrl" value="/WEB-INF/views/error/404.jsp"/> -->
-		<!-- <property name="filters">
+		 <property name="filters">
 			<map>
 				<entry key="authc" value-ref="captchaFormAuthenticationFilter" />
 			</map>
-		</property> -->
+		</property>
 		<property name="filterChainDefinitions">
 			<value>
 				/login = authc
@@ -59,5 +60,6 @@
 		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
 		<property name="securityManager" ref="securityManager" />
 	</bean>
-	
+	<bean id="captchaFormAuthenticationFilter"
+		class="com.infotop.account.service.CaptchaFormAuthenticationFilter" />
 </beans>

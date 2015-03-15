@@ -7,9 +7,9 @@
   <select id="login" parameterType="map" resultType="User">
     SELECT
     	id,
-    	name,
-   		password,
-    	create_date
+    	login_name,
+   		name,area,password,salt,
+    	register_date,user_status,user_type
     FROM user
     WHERE name = #{name} AND password = #{password}
   </select>
@@ -32,18 +32,20 @@
   
   <select id="getUser" resultMap="userResult">
     SELECT
-    	u.id as user_id ,
-    	u.name as user_name,
-    	u.create_date,
+    	u.id as id ,
+    	u.login_name as loginName,
+    	u.name,u.area,
+    	u.password,u.salt,
+    	u.register_date,u.user_status,u.user_type,
     	r.id as role_id,
-    	r.role_name,
+    	r.name,
     	r.description
     FROM user u
     LEFT JOIN user_role ur ON(u.id=ur.user_id)
-    LEFT JOIN role r ON(r.id=ur.role_id) where u.name=#{username}
+    LEFT JOIN role r ON(r.id=ur.role_id) where u.login_name=#{username}
   </select>
   <select id="getUsernameById" resultType="String">
-		select name as user_name  from user where id = #{id} 
+		select name as name  from user where id = #{id} 
  </select>
  	<select id="getDatagridTotal" resultType="long">
 		select count(1) from user where  1=1
@@ -51,13 +53,29 @@
             and name like concat('%',#{name},'%')
         </if>
 	</select>
+	
+	<select id="datagridUser" resultType="User">
+		select id,login_name,name,register_date from user where 1=1
+		<if test="sort != null and sort != ''">
+            order by #{sort} #{order}
+        </if>
+        <if test="page > 0">
+            limit #{start},#{end}
+        </if>
+	</select>
   <resultMap id="userResult"  type="User"> 
-		<id property="id"  column="id" />
+ 		<id property="id"  column="id" />
+		<result property="loginName" column="login_name"/>
 		<result property="name" column="name"/>
-		<result property="createDate" column="create_date"/>
+		<result property="area" column="area"/>
+		<result property="password" column="password"/>
+		<result property="salt" column="salt"/>
+		<result property="registerDate" column="register_date"/>
+		<result property="userStatus" column="user_status"/>
+		<result property="userType" column="user_type"/>
 		<collection property="roles"  ofType="Role"> 
 			<id property="id"  column="id"/> 
-			<result property="name"  column="role_name"/>
+			<result property="name"  column="name"/>
 			<result property="description" column="description"/>
 		</collection> 
   </resultMap>

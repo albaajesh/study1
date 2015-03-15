@@ -65,7 +65,7 @@ img {
 	//定义列表toolbar ID
 	var user_list_toolbar_id = 'user_list_toolbar';
 	//定义操作链接
-	var user_list_DATAGRID_LOAD_URL = '${ctx}/account/user/findList';
+	var user_list_DATAGRID_LOAD_URL = '${ctx}/account/userDatagrid';
 	var user_list_AUTHORIZE_URL = '${ctx}/account/user/authorize/';
 	var user_list_CREATE_URL = '${ctx}/register';
 	var user_list_RESETPASSWORD_URL = '${ctx}/account/user/resetpassword/';

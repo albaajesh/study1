@@ -4,10 +4,10 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ page
 	import="org.apache.shiro.web.filter.authc.FormAuthenticationFilter"%>
-<%-- <%@ page
-	import="com.infotop.system.account.service.CaptchaFormAuthenticationFilter"%>
+ <%@ page
+	import="com.infotop.account.service.CaptchaFormAuthenticationFilter"%>
 <%@ page
-	import="com.infotop.system.account.service.IncoreectCaptchaException"%> --%>
+	import="com.infotop.account.service.IncoreectCaptchaException"%> 
 <%@ page import="org.apache.shiro.authc.LockedAccountException "%>
 
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
@@ -70,7 +70,7 @@
 			$("#loginForm").show();
 		}
 		$("#loginForm").validationEngine();
-	/* <c:choose>
+	 <c:choose>
 	<c:when test="${fn:contains(shiroLoginFailure,'UnknownAccountException')}">
 			$("#loginForm").validationEngine("showPrompt","该用户不存在","error");
 		</c:when>
@@ -83,7 +83,7 @@
 		<c:when test="${shiroLoginFailure ne null}">
 			$("#loginForm").validationEngine("showPrompt","登录认证错误，请重试！","error");
 		</c:when>
-	</c:choose> */
+	</c:choose> 
 	});
 </script>
 	<div class="login">
@@ -107,13 +107,13 @@
 							name="password" class="in validate[required]"
 							data-prompt-position="bottomRight:-220,10" />
 					</div>
-					<div class="loginform">
+					 <div class="loginform">
 						<b class="checkimg"></b><input type="text" name="captcha"
 							class="in validate[required]"
 							data-prompt-position="bottomRight:-220,10" />
 					</div>
 					<input class="loginin" type="submit" value="登　　　录" />
-					<%-- <div
+					 <div
 						style="position: relative; width: 65px; height: 30px; top: -98px; right: -245px; border: #000 1px solid;">
 						<img src="${ctx }/static/kaptcha.jpg" width="65" height="30"
 							alt="" id="kaptchaImage" style="cursor: pointer;" />
@@ -124,7 +124,7 @@
 							        	});
 							    });
 							</script>
-					</div> --%>
+					</div> 
 				</form>
 
 			</div>

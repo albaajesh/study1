@@ -5,7 +5,10 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+
+
 import com.infotop.account.model.User;
+import com.infotop.common.PageHelper;
 
 
 
@@ -16,6 +19,7 @@ public interface UserMapper {
 	String getPassword(String userName);
 	public String getUsernameById(@Param("id") int id);
 	public Long getDatagridTotal(User user);
+	public List<User> datagridUser(PageHelper page);
 	User getUser(String userName);
 	User login(Map<String,Object> param);
 	User getUser(Map<String,Object> param);

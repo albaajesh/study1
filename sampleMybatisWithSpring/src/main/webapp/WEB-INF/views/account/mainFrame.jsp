@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title><spring:message code="webharvest_WebDataHarvesting" /></title>
+<title>Mybatis Framework</title>
 <%@ include file="/common/easyui_inc.jsp"%>
 <script type="text/javascript"
 	src="${ctx}/static/js/extAppJs/app_index.js"></script>
@@ -29,16 +29,18 @@
 				<div id="index_calendar" style="height: 180px; overflow: hidden;"></div>
 			</div>
 		</div>
-		<%-- <div data-options="iconCls:'icon-logo',region:'center'"
-			title="<spring:message code="webharvest_WebDataHarvesting" />！" style="overflow: hidden;">
+		 <%-- <div data-options="iconCls:'icon-logo',region:'center'"
+			title="user" style="overflow: hidden;">
 			<div id="index_tabs" style="overflow: hidden;">
-			<div title="拓普" data-options="href:'${ctx }/home/coverpage',iconCls:'icon-house'"></div></div>
+			<div title="拓普" data-options="href:'${ctx}/account/user',iconCls:'icon-house'"></div></div>
 		</div> --%>
 		
 		
 		<div data-options="iconCls:'icon-logo',region:'center'"
-			title="拓普网络-引领科技现代生活！" style="overflow: hidden;">
-			<div id="index_tabs" style="overflow: hidden;"></div>
+			title="Mybatis！" style="overflow: hidden;">
+			<%-- <div id="index_tabs" style="overflow: hidden;">
+			<div title="拓普" data-options="href:'${ctx}/account/user',iconCls:'icon-house'"></div></div> --%>
+			
 		</div>
 
 		<div data-options="region:'south',border:true"

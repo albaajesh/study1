@@ -37,7 +37,7 @@
 	default-lazy-init="true">
 
 	<description>MybatisWithSPring </description>
-	<mybatis:scan base-package="com.infotop.account.mapper"/>
+	
 	<!-- 使用annotation 自动注册bean, 并保证@Required、@Autowired的属性被注入 -->
 	<context:component-scan base-package="com.infotop.account.service">
 		<context:exclude-filter type="annotation"
@@ -45,9 +45,8 @@
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
 	</context:component-scan>
-	<bean class="com.infotop.account.mapper.UserMapper"/>
-	<bean class="com.infotop.account.mapper.RoleMapper"/>
 	
+	<mybatis:scan base-package="com.infotop.account.mapper"/>
 	 <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 	 <property name="dataSource" ref="dataSource" />
 	 

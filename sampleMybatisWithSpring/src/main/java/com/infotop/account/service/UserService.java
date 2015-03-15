@@ -4,8 +4,11 @@
 package com.infotop.account.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
+
+import net.infotop.web.easyui.DataGrid;
 
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -32,6 +35,10 @@ import com.infotop.account.model.User;
 @Service
 public class UserService {
 
+	public static final String HASH_ALGORITHM = "SHA-1";
+	public static final int HASH_INTERATIONS = 1024;
+	private static final int SALT_SIZE = 8;
+	
 	@Resource
 	private UserMapper userMapper;
 	/**
@@ -41,7 +48,11 @@ public class UserService {
 	public User findUserByName(String username) {
 		return userMapper.getUser(username);
 	}
-	
+	/*public DataGrid dataGridForAll(int pageNumber,
+			int rows, String sortType, String order) {			
+		return getDatagridList(rows,(pageNumber-1)*rows);
+		
+	}*/
 	 //将查询到的数据缓存到myCache中,并使用方法名称加上参数中的userNo作为缓存的key  
     //通常更新操作只需刷新缓存中的某个值,所以为了准确的清除特定的缓存,故定义了这个唯一的key,从而不会影响其它缓存值  
     @Cacheable(value="myCache", key="#id")  

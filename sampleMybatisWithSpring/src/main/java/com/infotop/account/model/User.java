@@ -9,16 +9,27 @@ public class User implements Serializable {
 	private static final long serialVersionUID = -5268898209820709788L;
 	
 	private Long id;
+	private String loginName;
 	private String name;
+	private String area;
+	private String plainPassword;
 	private String password;
-	private Date createDate;
+	private String salt;
+	private String registerDate;
+	private int userStatus;
+	private int userType;
 	private Set<Role> roles = new HashSet<Role>();
-	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getLoginName() {
+		return loginName;
+	}
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
 	}
 	public String getName() {
 		return name;
@@ -26,17 +37,47 @@ public class User implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getArea() {
+		return area;
+	}
+	public void setArea(String area) {
+		this.area = area;
+	}
+	public String getPlainPassword() {
+		return plainPassword;
+	}
+	public void setPlainPassword(String plainPassword) {
+		this.plainPassword = plainPassword;
+	}
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Date getCreateDate() {
-		return createDate;
+	public String getSalt() {
+		return salt;
 	}
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+	public String getRegisterDate() {
+		return registerDate;
+	}
+	public void setRegisterDate(String registerDate) {
+		this.registerDate = registerDate;
+	}
+	public int getUserStatus() {
+		return userStatus;
+	}
+	public void setUserStatus(int userStatus) {
+		this.userStatus = userStatus;
+	}
+	public int getUserType() {
+		return userType;
+	}
+	public void setUserType(int userType) {
+		this.userType = userType;
 	}
 	public Set<Role> getRoles() {
 		return roles;
@@ -44,5 +85,6 @@ public class User implements Serializable {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+	
 	
 }

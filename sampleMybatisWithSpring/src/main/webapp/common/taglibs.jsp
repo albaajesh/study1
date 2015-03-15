@@ -4,5 +4,5 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springside.org.cn/tags/form"%>
 <%@ taglib prefix="shiro" uri="http://www.springside.org.cn/tags/shiro"%>
+<%@ page import="com.infotop.account.service.AuthenticationRealm.ShiroUser,org.apache.shiro.SecurityUtils"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
-<%-- <%@ page import="com.infotop.system.account.service.ShiroDbRealm.ShiroUser,org.apache.shiro.SecurityUtils"%> --%>

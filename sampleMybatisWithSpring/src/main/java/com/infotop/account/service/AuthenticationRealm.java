@@ -1,37 +1,40 @@
 package com.infotop.account.service;
 
 import java.io.Serializable;
-import java.sql.SQLException;
+
 import java.util.HashSet;
-import java.util.List;
+
 import java.util.Set;
 
-import javax.annotation.Resource;
+import javax.annotation.PostConstruct;
+
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.shiro.authc.AccountException;
+
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.UnknownAccountException;
+
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.web.util.WebUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.shiro.util.ByteSource;
 
-import com.infotop.account.mapper.RoleMapper;
-import com.infotop.account.mapper.UserMapper;
+import org.springside.modules.utils.Encodes;
+
+
 import com.infotop.account.model.Permission;
 import com.infotop.account.model.Role;
 import com.infotop.account.model.User;
+
+
+
 
 
 
@@ -43,20 +46,19 @@ public class AuthenticationRealm extends AuthorizingRealm {
 
    // private static final Logger log = LoggerFactory.getLogger(AuthenticationRealm.class);
     
-	@Autowired
-	private UserService userService;
-    
-	@Autowired
-    private RoleService roleService;
+	protected AccountService accountService;
     
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         UsernamePasswordToken upToken = (UsernamePasswordToken) token;
-        User user = userService.findUserByName(upToken.getUsername());
+        User user = accountService.findUserByName(upToken.getUsername());
+       // String password =  userService.getPassword(upToken.getUsername());
         ShiroUser shiroUser = null;
         if(user!=null){
-        	shiroUser = new ShiroUser(user.getId(),user.getName());
-        	return new SimpleAuthenticationInfo(shiroUser,user.getPassword(),getName());
+        	shiroUser = new ShiroUser(user.getId(), user.getLoginName(),
+					user.getName(), user.getRegisterDate(), user.getUserType());
+        	byte[] salt = Encodes.decodeHex(user.getSalt());
+        	return new SimpleAuthenticationInfo(shiroUser,user.getPassword(),ByteSource.Util.bytes(salt),getName());
         }else{
         	return null;
         }
@@ -94,7 +96,7 @@ public class AuthenticationRealm extends AuthorizingRealm {
 	        Set<String> roleNames = getRoleNameByUserName(username);
 	        Set<String> permissions = new HashSet<String>();
 	        for(String roleName : roleNames){
-	        	Role role = roleService.findRoleByName(roleName);
+	        	Role role = accountService.findRoleByName(roleName);
 	        	for(Permission permission :role.getPermissions()){
 	        		permissions.add(permission.getModule()+":"+permission.getPrivilege());
 	        	}
@@ -107,7 +109,7 @@ public class AuthenticationRealm extends AuthorizingRealm {
 	
 	public Set<String> getRoleNameByUserName(String username){
 		Set<String> roless = new HashSet<String>();
-		User user = userService.findUserByName(username);
+		User user = accountService.findUserByName(username);
 		for(Role role:user.getRoles()){
 			roless.add(role.getName());
 			//log.debug(role.getName());
@@ -116,19 +118,45 @@ public class AuthenticationRealm extends AuthorizingRealm {
 		return roless;
 		
 	}
+	
+	@PostConstruct
+	public void initCredentialsMatcher() {
+		HashedCredentialsMatcher matcher = new HashedCredentialsMatcher(
+				accountService.HASH_ALGORITHM);
+		matcher.setHashIterations(accountService.HASH_INTERATIONS);
+
+		setCredentialsMatcher(matcher);
+	}
+	
+	
+
+	
+
+	public void setAccountService(AccountService accountService) {
+		this.accountService = accountService;
+	}
+
+
+
+
+
+
 	public static class ShiroUser implements Serializable {
 		private static final long serialVersionUID = -1373760761780840081L;
 		public Long id;
 		public String loginName;
 		public String name;
 		public int roleId;
-		public String theme;
+		public String registerDate;
 		public int userType;
 
-		public ShiroUser(Long id, String name) {
+		public ShiroUser(Long id, String loginName, String name, String registerDate,
+				int userType) {
 			this.id = id;
+			this.loginName = loginName;
 			this.name = name;
-			
+			this.registerDate = registerDate;
+			this.userType = userType;
 		}
 
 		public String getName() {
@@ -143,9 +171,12 @@ public class AuthenticationRealm extends AuthorizingRealm {
 			return loginName;
 		}
 
-		public String getTheme() {
-			return theme;
+		
+
+		public String getRegisterDate() {
+			return registerDate;
 		}
+
 
 		public int getUserType() {
 			return userType;
