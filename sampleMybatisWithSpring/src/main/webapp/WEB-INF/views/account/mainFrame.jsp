@@ -38,8 +38,8 @@
 		
 		<div data-options="iconCls:'icon-logo',region:'center'"
 			title="Mybatis！" style="overflow: hidden;">
-			<%-- <div id="index_tabs" style="overflow: hidden;">
-			<div title="拓普" data-options="href:'${ctx}/account/user',iconCls:'icon-house'"></div></div> --%>
+			 <div id="index_tabs" style="overflow: hidden;">
+			<%-- <div title="拓普" data-options="href:'${ctx}/account/user',iconCls:'icon-house'"></div> --%></div> 
 			
 		</div>
 

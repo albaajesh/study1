@@ -54,7 +54,7 @@
         </if>
 	</select>
 	
-	<select id="datagridUser" resultType="User">
+	<select id="datagridUser" resultMap="userResult">
 		select id,login_name,name,register_date from user where 1=1
 		<if test="sort != null and sort != ''">
             order by #{sort} #{order}

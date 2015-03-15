@@ -149,15 +149,14 @@ $(function() {
 	});
 
 	indexTabsAddTab = function(type, params) {
-		alert("type"+type);
-		alert("params"+params);
+		
 		parent.$.messager.progress({
 			title : '提示',
 			text : '数据处理中，请稍后....'
 		});
 		var opts;
 		if (type == '' || type == 'href') {
-			alert("inside");
+			
 			opts = {
 				title : params.title,
 				closable : true,
@@ -170,7 +169,7 @@ $(function() {
 				fit : true
 			};
 		} else {
-			alert("else");
+			
 			var iframe = '<iframe src="'
 					+ params.url
 					+ '" frameborder="0" style="border:0;width:100%;height:98%;"></iframe>';
@@ -183,6 +182,7 @@ $(function() {
 				fit : true
 			};
 		}
+		
 		if (index_tabs.tabs('exists', opts.title)) {
 			alert("exist");
 			index_tabs.tabs('select', opts.title);

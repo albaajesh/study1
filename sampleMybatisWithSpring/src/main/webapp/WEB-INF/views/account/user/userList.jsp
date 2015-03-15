@@ -67,7 +67,7 @@ img {
 	//定义操作链接
 	var user_list_DATAGRID_LOAD_URL = '${ctx}/account/userDatagrid';
 	var user_list_AUTHORIZE_URL = '${ctx}/account/user/authorize/';
-	var user_list_CREATE_URL = '${ctx}/register';
+	var user_list_CREATE_URL = '${ctx}/account/create/';
 	var user_list_RESETPASSWORD_URL = '${ctx}/account/user/resetpassword/';
 	var user_list_UPDATE_URL = '${ctx}/account/user/update/';
 	var user_list_DELETE_URL = '${ctx}/account/user/delete';
@@ -83,6 +83,7 @@ img {
 	}
 	// 定义相关的操作按钮
 	function user_list_actionFormatter(value, row, index) {
+		console.log(row);
 		var str = '';
 		str += formatString(
 				'<img onclick="updateForm(\'{0}\',\'user_form_inputForm\',user_list_datagrid,{title:\'修改帐号信息\',width:550,height:300});" src="{1}" title="编辑"/>',
@@ -130,10 +131,11 @@ img {
 		title : '<spring:message code="account_name" />',
 		width : 150
 	}, {
-		field : 'userType',
-		title : '用户类型',
-		width : 150,
-		formatter : userTypeFormatter
+		field : 'registerDate',
+		/* title : '用户类型', */
+		title : 'register_date',
+		width : 150/* ,
+		formatter : userTypeFormatter */
 	}, {
 		field : 'action',
 		title : '<spring:message code="menu_operation" />',
@@ -155,7 +157,7 @@ img {
 			singleSelect : true,
 			idField : 'id',
 			pageSize : 10,
-			pageList : [ 5, 10, 20, 30, 40, 50 ],
+			pageList : [5, 10, 20, 30, 40, 50 ],
 			columns : user_list_datagrid_columns,
 			toolbar : '#' + user_list_toolbar_id,
 			view : groupview,

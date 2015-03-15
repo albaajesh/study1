@@ -31,14 +31,17 @@ public class UserController extends BasicController {
 	
 	@RequestMapping(value = "/user",method = RequestMethod.GET)
     public String userList(Model model) {
-		ShiroUser su = super.getLoginUser();
-		User user = accountService.findUserByName(su.getLoginName());
-		if(user!=null){
+		/*ShiroUser su = super.getLoginUser();
+		System.out.println("userName----"+su.getLoginName());*/
+		/*ShiroUser su = super.getLoginUser();
+		System.out.println("userName----"+su.getLoginName());
+		User user = accountService.findUserByName(su.getLoginName());*/
+		/*if(user!=null){
 			System.out.println("inside------"+accountService.getDatagridTotal(user));
 		}else{
 			return "redirect:/login";
 		}
-		System.out.println("insides------"+accountService.getDatagridTotal(user));
+		System.out.println("insides------"+accountService.getDatagridTotal(user));*/
         return "account/user/userList";
     }
 	
@@ -47,16 +50,16 @@ public class UserController extends BasicController {
 	@RequestMapping(value="/userDatagrid", method = RequestMethod.POST)
 	public DataGrid datagrid(PageHelper page,User user) {
 		DataGrid dg = new DataGrid();
-		ShiroUser su = super.getLoginUser();
+	/*	ShiroUser su = super.getLoginUser();
 			user = accountService.findUserByName(su.getLoginName());
-			if (user != null) {
+			if (user != null) {*/
 				dg.setTotal(accountService.getDatagridTotal(user));
 				System.out.println("Size----"+accountService.getDatagridTotal(user));
 				List<User> userList = accountService.datagridUser(page);
 				dg.setRows(userList);
-			}else {
+			/*}else {
 				System.out.println("Login---");
-			}
+			}*/
 		return dg;
 	}
 	

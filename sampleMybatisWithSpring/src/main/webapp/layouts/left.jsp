@@ -19,7 +19,12 @@
 					<img
 					src="${ctx}/static/js/plugins/jquery-easyui-1.3.4/themes/icons/user_gray.png" />&nbsp;<!-- 用户管理 -->User
 			</a></li>
-			
+			<li><a data-options="plain:true" href="javascript:void(0)"
+				class="user easyui-linkbutton"
+				onclick="indexTabsAddTab('href',{title:'Employee',url:'${ctx}/employee/list',iconCls:'icon-user_gray'})">
+					<img
+					src="${ctx}/static/js/plugins/jquery-easyui-1.3.4/themes/icons/user_gray.png" />&nbsp;<!-- 用户管理 -->Employee
+			</a></li>
 		</ul>
 		
 	</div>

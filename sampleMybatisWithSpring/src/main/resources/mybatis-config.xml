@@ -69,6 +69,7 @@
 		<typeAlias alias="Role" type="com.infotop.account.model.Role" />
 		<typeAlias alias="Menu" type="com.infotop.account.model.Menu" />
 		<typeAlias alias="Permission" type="com.infotop.account.model.Permission" />
+		<typeAlias alias="Employee" type="com.infotop.account.model.Employee" />
 	</typeAliases>
    <!--  <plugins>
         <plugin interceptor="com.eliteams.quick4j.core.feature.orm.mybatis.PaginationResultSetHandlerInterceptor"/>
