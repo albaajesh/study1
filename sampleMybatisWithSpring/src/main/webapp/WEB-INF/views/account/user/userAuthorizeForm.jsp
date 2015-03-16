@@ -5,7 +5,7 @@
 		parent.$.messager.progress('close');
 		$('#roleIds').combotree(
 				{
-					url : '${ctx}/account/role/tree',
+					url : '${ctx}/role/tree',
 					parentField : 'pid',
 					lines : true,
 					panelHeight : 'auto',

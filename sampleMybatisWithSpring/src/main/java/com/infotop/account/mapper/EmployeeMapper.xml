@@ -26,5 +26,24 @@
             limit #{start},#{end}
         </if>
 </select>
+<select id="getEmployeeById" resultMap="employeeResult">
+		select id,name,age,department from employee_details where id = #{id} 
+ </select>
+ <insert id="insert" parameterType="Employee" keyProperty="id"
+		useGeneratedKeys="true">
+  	INSERT INTO employee_details (name, age, department)
+    VALUES (#{name}, #{age}, #{department})
+  </insert>
+   <update id="update"  parameterType="Employee"> 
+	UPDATE employee_details SET
+	name=#{name},
+	age=#{age},
+	department=#{department}
+	WHERE id=#{id} 
+  </update>
+  
+   <delete id="delete" parameterType="long">
+  	DELETE FROM employee_details WHERE id=#{id}
+  </delete>
 </mapper>
 	

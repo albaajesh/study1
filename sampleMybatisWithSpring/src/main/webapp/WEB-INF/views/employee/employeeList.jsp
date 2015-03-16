@@ -49,6 +49,7 @@
 	
 	//定义相关的操作按钮
 	function employee_list_actionFormatter(value,row,index){
+		console.log(row);
 		var str = '';	
 		str += formatString(
 				'<img onclick="updateForm(\'{0}\',\'employee_form_inputForm\',employee_list_datagrid,{title:\'编辑信息\'});" src="{1}" title="编辑"/>',
@@ -87,7 +88,7 @@
 			idField : 'id',
 			pageSize : 15,
 			pageList : [ 5, 10,15, 20, 30, 40, 50 ],
-			columns : pageurlinfo_list_datagrid_columns,
+			columns : employee_list_datagrid_columns,
 			toolbar:'#'+employee_list_toolbar_id,
 			onLoadSuccess : function() {	
 				$(this).datagrid('tooltip');
@@ -100,7 +101,7 @@
 	}
 	$ .parser.onComplete = function() {
 		//加载DataGrid数据
-		pageurlinfo_list_loadDataGrid();	
+		employee_list_loadDataGrid();	
 		//绑定按钮事件
 		bindSearchBtn('employee_list_searchBtn','employee_list_clearBtn','employee_list_searchForm',employee_list_datagrid);
 	};

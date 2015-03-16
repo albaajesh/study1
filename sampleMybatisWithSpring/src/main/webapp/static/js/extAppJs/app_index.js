@@ -184,11 +184,10 @@ $(function() {
 		}
 		
 		if (index_tabs.tabs('exists', opts.title)) {
-			alert("exist");
 			index_tabs.tabs('select', opts.title);
 			parent.$.messager.progress('close');
 		} else {
-			alert("Notexist");
+			
 			index_tabs.tabs('add', opts);
 		}
 	};

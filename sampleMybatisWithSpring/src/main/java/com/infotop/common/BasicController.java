@@ -3,13 +3,17 @@ package com.infotop.common;
 import net.infotop.web.easyui.Message;
 
 import org.apache.shiro.SecurityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.modules.mapper.JsonMapper;
 
 import com.infotop.account.service.AuthenticationRealm.ShiroUser;
+import com.infotop.common.log.BasicLogger;
 
 
 
 public abstract class BasicController {
+	@Autowired
+	public BasicLogger logger;
 	protected JsonMapper json = new JsonMapper();
 
 	protected Message msg = new Message();

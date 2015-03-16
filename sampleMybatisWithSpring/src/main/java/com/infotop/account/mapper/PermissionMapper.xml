@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infotop.account.mapper.PermissionMapper">
+<select id="getPermissionByRoleId" resultType="String">
+		select permission from role_permission where role_id = #{id} 
+ </select>
+ <select id="findPermissionByValue" resultMap="permissionResult">
+		select id,pid,ckey,pkey,name,value,permission_type,sort from permission where value = #{i} 
+ </select>
+ <select id="getAllPermission" resultMap="permissionResult">
+		select id,pid,ckey,pkey,name,value,permission_type,sort from permission
+ </select>
+ <select id="getPermissionValueById" parameterType="string" resultType="String">
+		select value from permission where id=#{id}
+ </select>
+ <insert id="saveRolePermission">
+  	INSERT INTO role_permission (role_id,permission)
+    VALUES (#{id}, #{value})
+  </insert>
+ 
+ 
+ <resultMap id="permissionResult"  type="Permission"> 
+ 			<id property="id"  column="id"/> 
+			<result property="pid"  column="pid"/>
+			<result property="ckey"  column="ckey"/>
+			<result property="pkey"  column="pkey"/>
+			<result property="name"  column="name"/>
+			<result property="value"  column="value"/>
+			<result property="permissionType"  column="permission_type"/>
+			<result property="sort"  column="sort"/>
+			</resultMap>
+ 
+</mapper>

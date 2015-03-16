@@ -3,7 +3,13 @@ package com.infotop.account.model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.springside.modules.utils.Collections3;
+
+import com.google.common.collect.Lists;
 
 public class User implements Serializable {
 	private static final long serialVersionUID = -5268898209820709788L;
@@ -18,7 +24,8 @@ public class User implements Serializable {
 	private String registerDate;
 	private int userStatus;
 	private int userType;
-	private Set<Role> roles = new HashSet<Role>();
+	private List<Role> roleList = Lists.newArrayList();
+	private String roleIds;
 	public Long getId() {
 		return id;
 	}
@@ -79,12 +86,29 @@ public class User implements Serializable {
 	public void setUserType(int userType) {
 		this.userType = userType;
 	}
-	public Set<Role> getRoles() {
-		return roles;
+	
+	
+	public List<Role> getRoleList() {
+		return roleList;
 	}
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+	public void setRoleList(List<Role> roleList) {
+		this.roleList = roleList;
+	}
+	public String getRoleIds() {
+		return roleIds;
+	}
+	public void setRoleIds(String roleIds) {
+		this.roleIds = roleIds;
 	}
 	
+	@JsonIgnore
+	public String getRids() {
+		return Collections3.extractToString(roleList, "id", ",");
+	}
+	
+	@JsonIgnore
+	public String getRoleNames() {
+		return Collections3.extractToString(roleList, "name", ", ");
+	}
 	
 }

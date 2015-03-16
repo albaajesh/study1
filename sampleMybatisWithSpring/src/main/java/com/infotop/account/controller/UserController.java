@@ -8,12 +8,17 @@ import net.infotop.web.easyui.DataGrid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
 
+
+
+
+import ch.qos.logback.classic.Logger;
 
 import com.infotop.account.model.User;
 import com.infotop.account.service.AccountService;
@@ -31,37 +36,40 @@ public class UserController extends BasicController {
 	
 	@RequestMapping(value = "/user",method = RequestMethod.GET)
     public String userList(Model model) {
-		/*ShiroUser su = super.getLoginUser();
-		System.out.println("userName----"+su.getLoginName());*/
-		/*ShiroUser su = super.getLoginUser();
-		System.out.println("userName----"+su.getLoginName());
-		User user = accountService.findUserByName(su.getLoginName());*/
-		/*if(user!=null){
-			System.out.println("inside------"+accountService.getDatagridTotal(user));
-		}else{
+		ShiroUser su = super.getLoginUser();
+		User user = accountService.findUserByName(su.getLoginName());
+		if (user != null) {
+		}else {
+			logger.log(this.getClass(),Logger.ERROR_INT,"登陆帐号无效!","",null);
 			return "redirect:/login";
 		}
-		System.out.println("insides------"+accountService.getDatagridTotal(user));*/
-        return "account/user/userList";
+		 return "account/user/userList";
     }
 	
 	
 	@ResponseBody
-	@RequestMapping(value="/userDatagrid", method = RequestMethod.POST)
+	@RequestMapping(value="/findList", method = RequestMethod.POST)
 	public DataGrid datagrid(PageHelper page,User user) {
 		DataGrid dg = new DataGrid();
-	/*	ShiroUser su = super.getLoginUser();
-			user = accountService.findUserByName(su.getLoginName());
-			if (user != null) {*/
+		ShiroUser su = super.getLoginUser();
+		user = accountService.findUserByName(su.getLoginName());
+		if (user != null) {
 				dg.setTotal(accountService.getDatagridTotal(user));
 				System.out.println("Size----"+accountService.getDatagridTotal(user));
 				List<User> userList = accountService.datagridUser(page);
 				dg.setRows(userList);
-			/*}else {
-				System.out.println("Login---");
-			}*/
+		} else {
+			logger.log(this.getClass(),Logger.ERROR_INT,"登陆帐号无效!","",null);
+		}
 		return dg;
 	}
 	
+	@RequestMapping(value = "authorize/{id}", method = RequestMethod.GET)
+	public String authorizeForm(@PathVariable("id") Long id, Model model) {
+		User user = accountService.getUserById(id);
+		model.addAttribute("user", user);
+		model.addAttribute("action", "authorize");
+		return "account/user/userAuthorizeForm";
+	}
 
 }

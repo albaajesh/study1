@@ -22,8 +22,8 @@
 	//定义列表toolbar ID
 	var role_list_toolbar_id = 'role_list_toolbar';
 	//定义操作链接
-	var role_list_DATAGRID_LOAD_URL = '${ctx}/account/role/findList';
-	var role_list_AUTHORIZE_URL = '${ctx}/account/role/authorize/';
+	var role_list_DATAGRID_LOAD_URL = '${ctx}/role/findList';
+	var role_list_AUTHORIZE_URL = '${ctx}/role/authorize/';
 	var role_list_CREATE_URL = '${ctx}/account/role/create';
 	var role_list_UPDATE_URL = '${ctx}/account/role/update/';
 	var role_list_DELETE_URL = '${ctx}/account/role/delete';

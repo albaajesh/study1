@@ -7,7 +7,7 @@
 		resourceTree = $('#resourceTree')
 				.tree(
 						{
-							url : '${ctx}/account/permission/tree',
+							url : '${ctx}/role/permission/tree',
 							parentField : 'pid',
 							// 					lines : true,
 							// 					panelHeight : '300',
@@ -124,7 +124,7 @@
 		style="width: 300px; padding: 1px;">
 		<div class="well well-small">
 			<form id="role_authorize_form_inputForm" method="post"
-				action="${ctx}/account/role/authorize">
+				action="${ctx}/role/authorize">
 				<input type="hidden" name="id" id="id" value="${role.id }" />
 				<ul id="resourceTree"></ul>
 				<input id="permissionIds" name="permissionIds" type="hidden" />

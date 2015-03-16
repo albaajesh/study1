@@ -21,9 +21,15 @@
 			</a></li>
 			<li><a data-options="plain:true" href="javascript:void(0)"
 				class="user easyui-linkbutton"
-				onclick="indexTabsAddTab('href',{title:'Employee',url:'${ctx}/employee/list',iconCls:'icon-user_gray'})">
+				onclick="indexTabsAddTab('href',{title:'Employee',url:'${ctx}/employee',iconCls:'icon-user_gray'})">
 					<img
 					src="${ctx}/static/js/plugins/jquery-easyui-1.3.4/themes/icons/user_gray.png" />&nbsp;<!-- 用户管理 -->Employee
+			</a></li>
+			<li><a data-options="plain:true" href="javascript:void(0)"
+				class="user easyui-linkbutton"
+				onclick="indexTabsAddTab('href',{title:'角色管理',url:'${ctx}/role',iconCls:'icon-group_key'})">
+					<img
+					src="${ctx}/static/js/plugins/jquery-easyui-1.3.4/themes/icons/group_key.png" />&nbsp;角色管理
 			</a></li>
 		</ul>
 		

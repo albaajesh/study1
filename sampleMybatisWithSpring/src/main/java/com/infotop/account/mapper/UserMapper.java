@@ -18,6 +18,7 @@ public interface UserMapper {
 	Long getId();
 	String getPassword(String userName);
 	public String getUsernameById(@Param("id") int id);
+	User getUserById(@Param("id") Long id);
 	public Long getDatagridTotal(User user);
 	public List<User> datagridUser(PageHelper page);
 	User getUser(String userName);

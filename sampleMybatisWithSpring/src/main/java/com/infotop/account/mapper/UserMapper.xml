@@ -31,15 +31,16 @@
   </select>
   
   <select id="getUser" resultMap="userResult">
-    SELECT
+   SELECT
     	u.id as id ,
-    	u.login_name as loginName,
+    	u.login_name,
     	u.name,u.area,
     	u.password,u.salt,
     	u.register_date,u.user_status,u.user_type,
-    	r.id as role_id,
+    	r.id,
     	r.name,
-    	r.description
+	r.role_type,r.pid,
+    	r.remark
     FROM user u
     LEFT JOIN user_role ur ON(u.id=ur.user_id)
     LEFT JOIN role r ON(r.id=ur.role_id) where u.login_name=#{username}
@@ -53,7 +54,21 @@
             and name like concat('%',#{name},'%')
         </if>
 	</select>
-	
+	<select id="getUserById" resultMap="userResult">
+		 SELECT
+    	u.id as id ,
+    	u.login_name,
+    	u.name,u.area,
+    	u.password,u.salt,
+    	u.register_date,u.user_status,u.user_type,
+    	r.id,
+    	r.name,
+	r.role_type,r.pid,
+    	r.remark
+    FROM user u
+    LEFT JOIN user_role ur ON(u.id=ur.user_id)
+    LEFT JOIN role r ON(r.id=ur.role_id) where u.id=#{id} 
+ </select>
 	<select id="datagridUser" resultMap="userResult">
 		select id,login_name,name,register_date from user where 1=1
 		<if test="sort != null and sort != ''">
@@ -73,10 +88,12 @@
 		<result property="registerDate" column="register_date"/>
 		<result property="userStatus" column="user_status"/>
 		<result property="userType" column="user_type"/>
-		<collection property="roles"  ofType="Role"> 
+		<collection property="roleList"  ofType="Role"> 
 			<id property="id"  column="id"/> 
 			<result property="name"  column="name"/>
-			<result property="description" column="description"/>
+			<result property="roleType"  column="role_type"/>
+			<result property="pid"  column="pid"/>
+			<result property="remark" column="remark"/>
 		</collection> 
   </resultMap>
   

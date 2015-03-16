@@ -9,58 +9,68 @@ public class Permission implements Serializable {
 	private static final long serialVersionUID = 4157086074343671615L;
 	
 	private Long id;
-	
-	/* 模块 */
-	private String module;
-	/* 权限值 */
-	private String privilege;
-	
+	private int pid;
+	private String ckey;
+	private String pkey;
 	private String name;
+	private String value;
+	private String permissionType;
+	private int sort;
 	
-	private Set<Role> roles = new HashSet<Role>();//角色权限多对多
-
 	public Long getId() {
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
+	public Permission() {
+	}
 
+	public Permission(long id) {
+		this.id = id;
+	}
+	public int getPid() {
+		return pid;
+	}
+	public void setPid(int pid) {
+		this.pid = pid;
+	}
+	public String getCkey() {
+		return ckey;
+	}
+	public void setCkey(String ckey) {
+		this.ckey = ckey;
+	}
+	public String getPkey() {
+		return pkey;
+	}
+	public void setPkey(String pkey) {
+		this.pkey = pkey;
+	}
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
-
-	public String getModule() {
-		return module;
+	public String getValue() {
+		return value;
 	}
-
-	public void setModule(String module) {
-		this.module = module;
+	public void setValue(String value) {
+		this.value = value;
 	}
-
-	public String getPrivilege() {
-		return privilege;
+	public String getPermissionType() {
+		return permissionType;
 	}
-
-	public void setPrivilege(String privilege) {
-		this.privilege = privilege;
+	public void setPermissionType(String permissionType) {
+		this.permissionType = permissionType;
 	}
-
-	public Set<Role> getRoles() {
-		return roles;
+	public int getSort() {
+		return sort;
 	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+	public void setSort(int sort) {
+		this.sort = sort;
 	}
-	
 	
 
 }

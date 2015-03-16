@@ -7,7 +7,7 @@
   	SELECT max(id) FROM t_role
   </select>
   
-  <select id="getRoles" parameterType="map" resultType="Role">
+ <!--  <select id="getRoles" parameterType="map" resultType="Role">
     SELECT
     	id,
     	name,
@@ -24,17 +24,17 @@
     		AND description = #{description}
     	</if>
     </where>
-  </select>
+  </select> -->
 
-  <select id="getRoleList" resultType="Role">
+  <!-- <select id="getRoleList" resultType="Role">
     SELECT
     	id,
     	name,
     	description
     FROM role
-  </select>
+  </select> -->
   
-  <select id="getRole" resultMap="roleResult">
+  <!-- <select id="getRole" resultMap="roleResult">
     SELECT
     	r.id as role_id,
     	r.role_name,
@@ -46,21 +46,64 @@
     FROM role r
     LEFT JOIN role_permission rp ON(r.id=rp.role_id)
     LEFT JOIN permission p ON(p.id=rp.permission_id) where r.role_name=#{name}
+  </select> -->
+  <select id="getAllRole" resultType="Role">
+    SELECT
+    	id,
+    	name,role_type,pid,
+    	remark
+    FROM role
   </select>
-  
+  <select id="getRoleById" resultMap="roleResult">
+		 SELECT id,name,role_type,pid,remark from role where id=#{id} 
+ </select>
+  <select id="getDatagridTotalForRole" resultType="long">
+		select count(1) from role where  1=1
+		<if test="name != null and name != ''">
+            and name like concat('%',#{name},'%')
+        </if>
+	</select>
+	
+	<select id="datagridRole" resultMap="roleResult">
+		select id,name,role_type,pid,remark from role where 1=1
+		<if test="sort != null and sort != ''">
+            order by #{sort} #{order}
+        </if>
+        <if test="page > 0">
+            limit #{start},#{end}
+        </if>
+	</select>
+	 <delete id="deleteRolePermissionById"  parameterType="long">
+  	DELETE FROM role_permission WHERE role_id=#{id}
+  </delete>
+	<!-- <select id="datagridRole" resultMap="roleResult">
+		select id,name,role_type,pid,remark from role where 1=1
+		<if test="sort != null and sort != ''">
+            order by #{sort} #{order}
+        </if>
+        <if test="page > 0">
+            limit #{start},#{end}
+        </if>
+	</select> -->
  <resultMap id="roleResult"  type="Role"> 
 		<id property="id"  column="id" />
-		<result property="name" column="role_name"/>
-		<result property="description" column="description"/>
-		<collection property="permissions"  ofType="Permission"> 
+		<result property="name" column="name"/>
+		<result property="roleType" column="role_type"/>
+		<result property="pid" column="pid"/>
+		<result property="remark" column="remark"/>
+		<!--  <collection property="permissionList"  ofType="Permission"> 
 			<id property="id"  column="id"/> 
-			<result property="name"  column="per_name"/>
-			<result property="module"  column="module"/>
-			<result property="privilege"  column="privilege"/>
-		</collection> 
+			<result property="pid"  column="pid"/>
+			<result property="ckey"  column="ckey"/>
+			<result property="pkey"  column="pkey"/>
+			<result property="name"  column="name"/>
+			<result property="value"  column="value"/>
+			<result property="permissionType"  column="permission_type"/>
+			<result property="sort"  column="sort"/>
+		</collection>  -->
   </resultMap>
   
-  <insert id="insertRole" parameterType="Role" >
+  <!-- <insert id="insertRole" parameterType="Role" >
   	INSERT INTO role (id,name,description)
     VALUES (#{id},#{name}, #{description})
   </insert>
@@ -91,6 +134,7 @@
   
   <delete id="deleteRoleMenu"  parameterType="map">
   	DELETE FROM menu_role WHERE role_id=#{role_id}
-  </delete>
+  </delete> -->
+ 
   
 </mapper>
