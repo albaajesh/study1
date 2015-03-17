@@ -28,11 +28,11 @@ img {
 	//定义列表toolbar ID
 	var permission_list_toolbar_id = 'permission_list_toolbar';
 	//定义操作链接
-	var permission_list_DATAGRID_LOAD_URL = '${ctx}/account/permission/treeList';
+	var permission_list_DATAGRID_LOAD_URL = '${ctx}/permission/treeList';
 	var permission_list_AUTHORIZE_URL = '${ctx}/account/permission/authorize/';
-	var permission_list_CREATE_URL = '${ctx}/account/permission/create';
-	var permission_list_UPDATE_URL = '${ctx}/account/permission/update/';
-	var permission_list_DELETE_URL = '${ctx}/account/permission/delete';
+	var permission_list_CREATE_URL = '${ctx}/permission/create';
+	var permission_list_UPDATE_URL = '${ctx}/permission/update/';
+	var permission_list_DELETE_URL = '${ctx}\/permission/delete';
 	var permission_list_REPORT_URL = '${ctx}/account/permission/report';
 	var permission_list_VIEW_URL = '${ctx}/account/permission/view/';
 

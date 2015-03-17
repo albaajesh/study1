@@ -11,6 +11,10 @@
  <select id="getAllPermission" resultMap="permissionResult">
 		select id,pid,ckey,pkey,name,value,permission_type,sort from permission
  </select>
+ <select id="getPermissionById" parameterType="long" resultMap="permissionResult">
+		select id,pid,ckey,pkey,name,value,permission_type,sort from permission where id=#{id}
+ </select>
+ 
  <select id="getPermissionValueById" parameterType="string" resultType="String">
 		select value from permission where id=#{id}
  </select>
@@ -18,7 +22,24 @@
   	INSERT INTO role_permission (role_id,permission)
     VALUES (#{id}, #{value})
   </insert>
- 
+  <insert id="savePermission" parameterType="Permission" keyProperty="id"
+		useGeneratedKeys="true">
+  INSERT INTO permission (pid,ckey,pkey,name,value,permission_type,sort) VALUES (#{pid},#{ckey},#{pkey},#{name},#{value},#{permissionType},#{sort})
+  </insert>
+ <select id="datagridPermission" resultMap="permissionResult">
+		select id,pid,ckey,pkey,name,value,permission_type,sort from permission where pid=#{pid} 
+		<!-- <if test="sort != null and sort != ''">
+            order by #{sort} #{order}
+        </if>
+        <if test="page > 0">
+            limit #{start},#{end}
+        </if> -->
+	</select>
+	<update id="updatePermission"  parameterType="Permission"> 
+	UPDATE permission SET
+	name=#{name},value=#{value},permission_type=#{permissionType}
+	WHERE id=#{id} 
+  </update>
  
  <resultMap id="permissionResult"  type="Permission"> 
  			<id property="id"  column="id"/> 

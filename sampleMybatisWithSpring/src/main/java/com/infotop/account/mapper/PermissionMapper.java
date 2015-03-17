@@ -8,6 +8,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.infotop.account.model.Permission;
+import com.infotop.common.PageHelper;
 
 /**
  * @Description: TODO
@@ -16,6 +17,8 @@ import com.infotop.account.model.Permission;
  */
 public interface PermissionMapper {
 
+	List<Permission> datagridPermission(@Param("pid") String pid);
+	
 	List<String> getPermissionByRoleId(Long id);
 
 	Permission findPermissionByValue(String i);
@@ -25,6 +28,14 @@ public interface PermissionMapper {
 	String getPermissionValueById(String id);
 
 	void saveRolePermission(@Param("id") Long id,@Param("value") String value);
+
+	Permission getPermissionById(long id);
+
+	void savePermission(Permission permission);
+
+	void updatePermission(Permission permission);
+
+	
 	
 	
 	

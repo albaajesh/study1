@@ -62,7 +62,7 @@
 </script>
 
 <form id="permission_form_inputForm" method="post"
-	action="${ctx}/account/permission/${action}">
+	action="${ctx}/permission/${action}">
 	<input type="hidden" id="id" name="id" value="${permission.id }" /><input
 		type="hidden" id="ckey" name="ckey" value="${permission.ckey }"
 		readonly="readonly" />
