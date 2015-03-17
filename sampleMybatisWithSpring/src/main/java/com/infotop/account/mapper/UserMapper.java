@@ -25,6 +25,7 @@ public interface UserMapper {
 	User getUserById(@Param("id") Long id);
 	public Long getDatagridTotal(User user);
 	User getUserUpdateById(Long id);
+	void deleteUser(Long id);
 	public List<User> datagridUser(PageHelper page);
 	void deleteUserRoleByUserId(Long id);
 	void insertUserRole(@Param("userId") Long id,@Param("roleId") Long roleId);
@@ -36,7 +37,7 @@ public interface UserMapper {
 	//void insertUserRole(Map<String,Object> param);
 	void updateUser(User user);
 	void updateUserRole(Map<String,Object> param);
-	void deleteUser(Map<String,Object> param);
+	
 	void deleteUserRole(Map<String,Object> param);
 	void changeUserPassword(Map<String,Object> param);
 	

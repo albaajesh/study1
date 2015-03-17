@@ -20,19 +20,21 @@ public interface RoleMapper {
 	public List<Role> datagridRole(PageHelper page);
 	public List<Role> getAllRole();
 	public Role getRoleById(@Param("id") Long id);
-	public void deleteRolePermissionById(@Param("id") Long id);
-	
+	//public void deleteRolePermissionById(@Param("id") Long id);
+	void updateRole(Role role);
+	public void deleteRolePermissionById(Long id);
 	Long getId();
 	Role getRole(String rolename);
 	List<Role> getRoleList();
 	List<Role> getRoleMenuList();
 	void insertRole(Role role);
 	void insertRoleMenu(Map<String,Object> param);
-	void updateRole(Role role);
-	void updateRoleMenu(Map<String,Object> param);
-	void deleteRole(Map<String,Object> param);
-	void deleteRoleMenu(Map<String,Object> param);
+	
+	//void updateRoleMenu(Map<String,Object> param);
+	//void deleteRole(Map<String,Object> param);
+	//void deleteRoleMenu(Map<String,Object> param);
 	//public Role getRoleById(Long id);
+	
 	
 	
 }

@@ -3,6 +3,7 @@ package com.infotop.account.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletRequest;
 import javax.validation.Valid;
 
 import net.infotop.web.easyui.DataGrid;
@@ -152,7 +153,32 @@ public class UserController extends BasicController {
 			}
 		 return "account/user/userView";
 	 }
-	 
+	 @RequestMapping(value = "delete", method = RequestMethod.POST)
+	 @ResponseBody
+	  public Message delete(@RequestParam(value = "ids") Long id,
+	            ServletRequest request) throws Exception {
+		 try {
+		 ShiroUser su = super.getLoginUser();
+			User user = accountService.findUserByName(su.getLoginName());
+			if (user != null) {
+		 	accountService.delete(id);
+		 	msg.setSuccess(true);
+			msg.setMessage("信息删除成功");
+			msg.setData("");
+	 }else {
+			logger.log(this.getClass(),Logger.ERROR_INT,"登陆帐号无效!","",null);
+			msg.setSuccess(false);
+			msg.setMessage("登陆帐号无效!");
+			msg.setData("");
+			}
+		} catch (Exception ex) {
+			logger.log(this.getClass(),Logger.ERROR_INT,ex.getMessage(),super.getLoginUser().getLoginName(),null);
+			msg.setSuccess(false);
+			msg.setMessage(ex.getMessage());
+			msg.setData("");
+		}
+			return msg;
+	 }
 	@RequestMapping(value = "authorize/{id}", method = RequestMethod.GET)
 	public String authorizeForm(@PathVariable("id") Long id, Model model) {
 		User user = accountService.getUserById(id);

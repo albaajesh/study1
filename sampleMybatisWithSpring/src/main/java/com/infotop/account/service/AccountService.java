@@ -162,5 +162,15 @@ public class AccountService {
 		roleMapper.updateRole(role);// TODO Auto-generated method stub
 		
 	}
+
+	public void delete(Long id) {
+		userMapper.deleteUser(id);
+		
+	}
+
+	public void deleteRole(Long id) {
+		roleMapper.deleteRolePermissionById(id);
+		
+	}
 	
 }

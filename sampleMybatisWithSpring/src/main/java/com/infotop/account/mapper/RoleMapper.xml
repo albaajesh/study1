@@ -82,8 +82,11 @@
         </if>
 	</select>
 	 <delete id="deleteRolePermissionById"  parameterType="long">
-  	DELETE FROM role_permission WHERE role_id=#{id}
+  	DELETE role,role_permission FROM role,role_permission WHERE role.id=#{id} AND role_permission.role_id=#{id}
   </delete>
+	<!--  <delete id="deleteRolePermissionById"  parameterType="long">
+  	DELETE FROM role_permission WHERE role_id=#{id}
+  </delete> -->
 	<!-- <select id="datagridRole" resultMap="roleResult">
 		select id,name,role_type,pid,remark from role where 1=1
 		<if test="sort != null and sort != ''">
