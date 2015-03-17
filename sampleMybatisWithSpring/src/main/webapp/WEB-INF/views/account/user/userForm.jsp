@@ -38,7 +38,7 @@
 	};
 </script>
 <form:form id="user_form_inputForm" name="user_form_inputForm"
-	action="${ctx}/account/user/${action}" modelAttribute="user"
+	action="${ctx}/account/${action}" modelAttribute="user"
 	method="post" class="form-horizontal">
 	<input type="hidden" name="id" id="id" value="${user.id}" />
 	<table style="width:100%;" class="content">
@@ -49,7 +49,7 @@
 		</tr>
 
 
-		<c:if test="${user.userType==0 }">
+		<%-- <c:if test="${user.userType==0 }"> --%>
 			<tr>
 				<td class="biao_bt3"><spring:message code="account_name" /></td>
 				<td><input type="text" name="name" id="name"
@@ -57,9 +57,23 @@
 					data-options="missingMessage:'名称不能为空.',required:true"
 					value="${ user.name }" class="required " /></td>
 			</tr>
-		</c:if>
+			<%-- <tr>
+				<td class="biao_bt3">password</td>
+				<td><input type="password" name="password" id="password"
+					class="easyui-validatebox"
+					data-options="missingMessage:'名称不能为空.',required:true"
+					value="${ user.password }" class="required " /></td>
+			</tr>
+			<tr>
+				<td class="biao_bt3">ReTypepassword</td>
+				<td><input type="password" name="retypepassword" id="retypepassword"
+					class="easyui-validatebox"
+					data-options="missingMessage:'名称不能为空.',required:true"
+					value="" class="required " /></td>
+			</tr> --%>
+		<%-- </c:if> --%>
 
-		<c:if test="${user.userType==1 }">
+		<%-- <c:if test="${user.userType==1 }">
 			<tr>
 				<td class="biao_bt3"><spring:message code="account_name" /></td>
 				<td><input type="text" name="name" id="name"
@@ -77,8 +91,8 @@
 						</c:forEach>
 				</select></td>
 			</tr>
-		</c:if>
-		<c:if test="${user.userType==2 }">
+		</c:if> --%>
+		<%-- <c:if test="${user.userType==2 }">
 			<tr>
 				<td class="biao_bt3"><spring:message code="account_name" /></td>
 				<td><input type="text" name="name" id="name"
@@ -96,8 +110,8 @@
 						</c:forEach>
 				</select></td>
 			</tr>
-		</c:if>
-		<c:if test="${user.userType==3 }">
+		</c:if> --%>
+		<%-- <c:if test="${user.userType==3 }">
 			<tr>
 				<td class="biao_bt3">企业名称</td>
 				<td><input type="text" name="name" id="name"
@@ -125,6 +139,6 @@
 						</c:forEach>
 				</select></td>
 			</tr>
-		</c:if>
+		</c:if> --%>
 	</table>
 </form:form>

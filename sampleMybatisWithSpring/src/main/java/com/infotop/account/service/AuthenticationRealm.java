@@ -1,22 +1,19 @@
 package com.infotop.account.service;
 
 import java.io.Serializable;
-
 import java.util.HashSet;
-
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
 
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
-
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationException;
@@ -25,13 +22,14 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
-
 import org.springside.modules.utils.Encodes;
+
 
 
 import com.infotop.account.model.Permission;
 import com.infotop.account.model.Role;
 import com.infotop.account.model.User;
+
 
 
 
@@ -83,9 +81,22 @@ public class AuthenticationRealm extends AuthorizingRealm {
            return info;*/
     }
 
+    @Override
+	protected AuthorizationInfo doGetAuthorizationInfo(
+			PrincipalCollection principals) {
+		ShiroUser shiroUser = (ShiroUser) principals.getPrimaryPrincipal();
+		User user = accountService.findUserByName(shiroUser.loginName);
+		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+		for (Role role : user.getRoleList()) {
+			// 基于Role的权限信息
+			info.addRole(role.getName());
+			// 基于Permission的权限信息
+			info.addStringPermissions(accountService.getPermissionByRoleId(role.getId()));
+		}
+		return info;
+	}
 
-
-	@Override
+	/*@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(
 			PrincipalCollection principals) {
 		  if (principals == null) {
@@ -117,7 +128,7 @@ public class AuthenticationRealm extends AuthorizingRealm {
 		
 		return roless;
 		
-	}
+	}*/
 	
 	@PostConstruct
 	public void initCredentialsMatcher() {

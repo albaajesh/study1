@@ -24,10 +24,10 @@
 	//定义操作链接
 	var role_list_DATAGRID_LOAD_URL = '${ctx}/role/findList';
 	var role_list_AUTHORIZE_URL = '${ctx}/role/authorize/';
-	var role_list_CREATE_URL = '${ctx}/account/role/create';
-	var role_list_UPDATE_URL = '${ctx}/account/role/update/';
-	var role_list_DELETE_URL = '${ctx}/account/role/delete';
-	var role_list_VIEW_URL = '${ctx}/account/role/view/';
+	var role_list_CREATE_URL = '${ctx}/role/create';
+	var role_list_UPDATE_URL = '${ctx}/role/update/';
+	var role_list_DELETE_URL = '${ctx}/role/delete';
+	var role_list_VIEW_URL = '${ctx}/role/view/';
 
 	// 定义相关的操作按钮
 	function role_list_actionFormatter(value, row, index) {

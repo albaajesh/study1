@@ -38,7 +38,8 @@
 	};
 </script>
 
-<form id="user_form_inputForm" method="post" action="${ctx}/register">
+<form id="user_form_inputForm" method="post" action="${ctx}/account/${action}" modelAttribute="user"
+	method="post" class="form-horizontal">
 	<input type="hidden" id="userType" name="userType"
 		value="${user.userType }">
 	<table style="width:100%;" class="content">
@@ -46,8 +47,8 @@
 			<td class="biao_bt3"><spring:message code="account_loginName" /></td>
 			<td><input type="text" name="loginName" id="loginName"
 				class="easyui-validatebox"
-				validType="remote['${ctx }/register/checkLoginName','loginName']"
-				data-options="missingMessage:'登陆帐号不能为空.',invalidMessage:'登陆帐号已存在，请重新输入！',required:true" /></td>
+				<%-- validType="remote['${ctx }/register/checkLoginName','loginName']" --%>
+				data-options="missingMessage:'登陆帐号不能为空.',invalidMessage:'登陆帐号已存在，请重新输入！', required:true" /></td>
 		</tr>
 		<tr>
 			<td class="biao_bt3"><spring:message code="account_password" /></td>
@@ -64,16 +65,16 @@
 					code="account_reTypePassword" />不能为空.',required:true"
 				class="easyui-validatebox" /></td>
 		</tr>
-		<c:if test="${user.userType==0 }">
+		<%-- <c:if test="${user.userType==0 }"> --%>
 			<tr>
 				<td class="biao_bt3"><spring:message code="account_name" /></td>
 				<td><input type="text" name="name" id="name"
 					class="easyui-validatebox"
 					data-options="missingMessage:'名称不能为空.',required:true" /></td>
 			</tr>
-		</c:if>
+		<%-- </c:if> --%>
 
-		<c:if test="${user.userType==1 }">
+		<%-- <c:if test="${user.userType==1 }">
 			<tr>
 				<td class="biao_bt3"><spring:message code="account_name" /></td>
 				<td><input type="text" name="name" id="name"
@@ -128,6 +129,6 @@
 						</c:forEach>
 				</select></td>
 			</tr>
-		</c:if>
+		</c:if> --%>
 	</table>
 </form>

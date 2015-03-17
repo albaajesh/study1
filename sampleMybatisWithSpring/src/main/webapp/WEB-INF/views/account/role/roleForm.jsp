@@ -43,7 +43,7 @@ $.parser.onComplete = function() {
 </script>
 
 <form id="role_form_inputForm" method="post"
-	action="${ctx}/account/role/${action}">
+	action="${ctx}/role/${action}">
 	<input type="hidden" id="id" name="id" value="${role.id }" />
 	<table class="content" style="width: 100%;">
 		<tr>

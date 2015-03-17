@@ -10,11 +10,14 @@
 					lines : true,
 					panelHeight : 'auto',
 					required : true,
+					checked : true,
 					idField : 'id',
 					multiple : true,
 					onLoadSuccess : function() {
+						alert("${user.rids}"+${user.rids});
 						$('#roleIds').combotree('setValues',
 								infotop.stringToList('${user.rids}'));
+						
 						parent.$.messager.progress('close');
 					},
 					cascadeCheck : false
@@ -64,7 +67,7 @@
 </script>
 
 <form id="user_form_inputForm" method="post"
-	action="${ctx}/account/user/authorize">
+	action="${ctx}/account/authorize">
 	<table width="100%" border="0" class="content" cellpadding="0"
 		cellspacing="0">
 		<tr>

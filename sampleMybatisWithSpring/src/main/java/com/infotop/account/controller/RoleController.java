@@ -67,6 +67,80 @@ public class RoleController extends BasicController {
 		}
 		return dg;
 	}
+	@RequestMapping(value = "create", method = RequestMethod.GET)
+	 public String createForm(Model model) {
+		ShiroUser su = super.getLoginUser();
+		User user = accountService.findUserByName(su.getLoginName());
+		if (user != null) {
+			Role entity = new Role();
+			model.addAttribute("role", entity);
+			model.addAttribute("action", "create");
+		}else {
+			logger.log(this.getClass(),Logger.ERROR_INT,"登陆帐号无效!","",null);
+			return "redirect:/login";
+		}
+		return "account/role/roleForm";
+			
+		}
+	 @RequestMapping(value = "create", method = RequestMethod.POST)
+	 @ResponseBody
+	 public Message create(@Valid Role role, RedirectAttributes redirectAttributes) {
+		try {
+		
+		accountService.insertRole(role);
+		msg.setSuccess(true);
+		msg.setMessage("信息添加成功");
+		msg.setData(role);
+		
+		} catch (Exception ex) {
+			logger.log(this.getClass(),Logger.ERROR_INT,ex.getMessage(),super.getLoginUser().getLoginName(),null);
+			msg.setSuccess(false);
+			msg.setMessage(ex.getMessage());
+			msg.setData("");
+		}
+		return msg;
+	 }
+	 @RequestMapping(value = "update/{id}", method = RequestMethod.GET)
+	 public String updateForm(@PathVariable("id") Long id, Model model) {
+		 
+		 Role role = accountService.getRoleById(id);
+		 model.addAttribute("role", role);
+		 model.addAttribute("action", "update");
+		 return "account/role/roleForm";
+	 }
+	 @RequestMapping(value = "update", method = RequestMethod.POST)
+	 @ResponseBody
+	 public Message update(@Valid Role role, RedirectAttributes redirectAttributes) {
+		try {
+			
+		accountService.updateRole(role);
+		msg.setSuccess(true);
+		msg.setMessage("信息添加成功");
+		msg.setData(role);
+			
+			} catch (Exception ex) {
+				logger.log(this.getClass(),Logger.ERROR_INT,ex.getMessage(),super.getLoginUser().getLoginName(),null);
+				msg.setSuccess(false);
+				msg.setMessage(ex.getMessage());
+				msg.setData("");
+			}
+		return msg;
+	 }
+	 @RequestMapping(value = "view/{id}", method = RequestMethod.GET)
+	    public String view(@PathVariable("id") Long id, Model model) {
+		 ShiroUser su = super.getLoginUser();
+		 User user = accountService.findUserByName(su.getLoginName());
+		 if (user != null) {
+			 Role role = new Role();
+			 role = accountService.getRoleById(id);
+		 model.addAttribute("role", role);
+		 }else {
+				logger.log(this.getClass(),Logger.ERROR_INT,"登陆帐号无效!","",null);
+				return "redirect:/login";
+			}
+		 return "account/user/userView";
+	 }
+	 
 	@RequestMapping(value = "tree")
 	@ResponseBody
 	public List<Tree> tree(Model model, ServletRequest request) {

@@ -51,7 +51,7 @@ img {
 		<div id="user_add_menu" style="display: none;">
 			<div data-options="iconCls:'icon-add'">
 				<a
-					href="javascript:updateForm(user_list_CREATE_URL+'/0','user_form_inputForm',user_list_datagrid,{title:'添加市级用户',width:550,height:300});">普通用户</a>
+					href="javascript:updateForm(user_list_CREATE_URL,'user_form_inputForm',user_list_datagrid,{title:'添加市级用户',width:550,height:300});">普通用户</a>
 			</div>
 		</div>
 	</div>
@@ -69,10 +69,10 @@ img {
 	var user_list_AUTHORIZE_URL = '${ctx}/account/authorize/';
 	var user_list_CREATE_URL = '${ctx}/account/create/';
 	var user_list_RESETPASSWORD_URL = '${ctx}/account/user/resetpassword/';
-	var user_list_UPDATE_URL = '${ctx}/account/user/update/';
-	var user_list_DELETE_URL = '${ctx}/account/user/delete';
+	var user_list_UPDATE_URL = '${ctx}/account/update/';
+	var user_list_DELETE_URL = '${ctx}/account/delete';
 	var user_list_REPORT_URL = '${ctx}/account/user/report';
-	var user_list_VIEW_URL = '${ctx}/account/user/view/';
+	var user_list_VIEW_URL = '${ctx}/account/view/';
 
 	function userTypeFormatter(value, row, index) {
 		switch (value) {

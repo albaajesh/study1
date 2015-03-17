@@ -1,5 +1,6 @@
 package com.infotop.account.service;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -14,7 +15,15 @@ import org.springframework.stereotype.Component;
 
 
 
+
+
+
+
+import org.springside.modules.security.utils.Digests;
+import org.springside.modules.utils.Encodes;
+
 import com.google.common.collect.Lists;
+import com.infotop.account.mapper.PermissionMapper;
 import com.infotop.account.mapper.RoleMapper;
 import com.infotop.account.mapper.UserMapper;
 import com.infotop.account.model.Role;
@@ -32,6 +41,9 @@ public class AccountService {
 	
 	@Resource
 	private RoleMapper roleMapper;
+	
+	@Resource
+	private PermissionMapper permissionMapper;
 	
 	public User findUserByName(String username) {
 		return userMapper.getUser(username);
@@ -94,4 +106,61 @@ public class AccountService {
 		roleMapper.deleteRolePermissionById(id);
 		
 	}
+	public List<String> getPermissionByRoleId(Long id) {
+		// TODO Auto-generated method stub
+		return permissionMapper.getPermissionByRoleId(id);
+	}
+
+	public void deleteUserRoleByUserId(Long id) {
+		userMapper.deleteUserRoleByUserId(id);
+		
+	}
+
+	public void insertUserRole(Long id, Long roleId) {
+		userMapper.insertUserRole(id,roleId);
+		
+	}
+	
+	private void entryptPassword(User user) throws NoSuchAlgorithmException {
+		byte[] salt = Digests.generateSalt(SALT_SIZE);
+		user.setSalt(Encodes.encodeHex(salt));
+		// MessageDigest md=MessageDigest.getInstance("MD5");
+		// byte[] hashPassword = md.digest(user.getPlainPassword().getBytes());
+		byte[] hashPassword = Digests.sha1(user.getPlainPassword().getBytes(),
+				salt, HASH_INTERATIONS);
+		user.setPassword(Encodes.encodeHex(hashPassword));
+
+	}
+
+	public void saveUser(User user) {
+		try {
+			entryptPassword(user);
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		userMapper.saveUser(user);
+		
+	}
+
+	public User getUserUpdateById(Long id) {
+		// TODO Auto-generated method stub
+		return userMapper.getUserUpdateById(id);
+	}
+
+	public void updateUser(User user) {
+		userMapper.updateUser(user);
+		
+	}
+
+	public void insertRole(Role role) {
+		roleMapper.insertRole(role);
+		
+	}
+
+	public void updateRole(Role role) {
+		roleMapper.updateRole(role);// TODO Auto-generated method stub
+		
+	}
+	
 }

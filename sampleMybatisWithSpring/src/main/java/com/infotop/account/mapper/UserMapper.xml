@@ -20,7 +20,11 @@
     FROM user
     WHERE name = #{name}
   </select>
-  
+  <insert id="saveUser" parameterType="User" keyProperty="id"
+		useGeneratedKeys="true">
+  	INSERT INTO user (login_name, name,area,password,salt,register_date,user_status,user_type)
+    VALUES (#{loginName}, #{name}, #{area}, #{password}, #{salt}, NOW(), #{userStatus}, #{userType})
+  </insert>
   
   
 
@@ -48,6 +52,14 @@
   <select id="getUsernameById" resultType="String">
 		select name as name  from user where id = #{id} 
  </select>
+  <select id="getUserUpdateById" resultMap="userResult">
+		select id,login_name,name from user where id = #{id} 
+ </select>
+ <update id="updateUser"  parameterType="User"> 
+	UPDATE user SET
+	name=#{name}
+	WHERE id=#{id} 
+  </update>
  	<select id="getDatagridTotal" resultType="long">
 		select count(1) from user where  1=1
 		<if test="name != null and name != ''">
@@ -96,6 +108,9 @@
 			<result property="remark" column="remark"/>
 		</collection> 
   </resultMap>
+  <delete id="deleteUserRoleByUserId"  parameterType="long">
+  	DELETE FROM user_role WHERE user_id=#{id}
+  </delete>
   
   <insert id="insertUser" parameterType="User" keyProperty="id"
 		useGeneratedKeys="true">
@@ -103,19 +118,19 @@
     VALUES (#{name}, #{password}, #{createDate,jdbcType=TIMESTAMP})
   </insert>
   
-  <insert id="insertUserRole" parameterType="map">
+  <insert id="insertUserRole">
   	INSERT INTO user_role (user_id,role_id)
-    VALUES (#{user_id}, #{role_id})
+    VALUES (#{userId}, #{roleId})
   </insert>
   
-  <update id="updateUser"  parameterType="User"> 
+  <!-- <update id="updateUser"  parameterType="User"> 
 	UPDATE user
 	<set> 
 		<if test="name != null">name=#{name},</if> 
 		<if test="password != null">password=#{password}</if>
 	</set>
 	WHERE id=#{id} 
-  </update>
+  </update> -->
   
   <update id="updateUserRole"  parameterType="map"> 
 	UPDATE user_role SET
