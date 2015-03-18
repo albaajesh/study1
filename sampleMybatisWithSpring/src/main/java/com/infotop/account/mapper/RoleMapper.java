@@ -23,12 +23,14 @@ public interface RoleMapper {
 	//public void deleteRolePermissionById(@Param("id") Long id);
 	void updateRole(Role role);
 	public void deleteRolePermissionById(Long id);
+	public void deleteRole(Long id);
 	Long getId();
 	Role getRole(String rolename);
 	List<Role> getRoleList();
 	List<Role> getRoleMenuList();
 	void insertRole(Role role);
 	void insertRoleMenu(Map<String,Object> param);
+	
 	
 	//void updateRoleMenu(Map<String,Object> param);
 	//void deleteRole(Map<String,Object> param);

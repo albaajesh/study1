@@ -81,9 +81,15 @@
             limit #{start},#{end}
         </if>
 	</select>
-	 <delete id="deleteRolePermissionById"  parameterType="long">
+	
+  <delete id="deleteRole"  parameterType="long">
   	DELETE role,role_permission FROM role,role_permission WHERE role.id=#{id} AND role_permission.role_id=#{id}
   </delete>
+    <delete id="deleteRolePermissionById"  parameterType="long">
+  	DELETE role_permission FROM role_permission WHERE role_id=#{id}
+  </delete>
+  
+  
 	<!--  <delete id="deleteRolePermissionById"  parameterType="long">
   	DELETE FROM role_permission WHERE role_id=#{id}
   </delete> -->

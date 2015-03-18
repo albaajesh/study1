@@ -149,5 +149,12 @@ public class PermissionService {
 
 
 
+		public void deletePermission(Long id) {
+			permissionMapper.deletePermission(id);
+			
+		}
+
+
+
 		
 }

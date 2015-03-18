@@ -36,10 +36,13 @@
         </if> -->
 	</select>
 	<update id="updatePermission"  parameterType="Permission"> 
-	UPDATE permission SET
-	name=#{name},value=#{value},permission_type=#{permissionType}
-	WHERE id=#{id} 
-  </update>
+	UPDATE permission a INNER JOIN role_permission b ON (a.value= b.permission)
+	SET a.name=#{name},a.value=#{value},a.permission_type=#{permissionType} , b.permission=#{value}
+	WHERE a.id=#{id} 
+	</update>
+  <delete id="deletePermission" parameterType="long">
+  delete a,b from permission a left join role_permission b on a.value=b.permission where a.id=#{id} or a.pid=#{id}
+  </delete>
  
  <resultMap id="permissionResult"  type="Permission"> 
  			<id property="id"  column="id"/> 

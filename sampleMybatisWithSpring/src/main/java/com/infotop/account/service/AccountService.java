@@ -169,7 +169,7 @@ public class AccountService {
 	}
 
 	public void deleteRole(Long id) {
-		roleMapper.deleteRolePermissionById(id);
+		roleMapper.deleteRole(id);
 		
 	}
 	

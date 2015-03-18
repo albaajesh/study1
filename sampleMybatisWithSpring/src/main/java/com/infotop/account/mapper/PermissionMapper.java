@@ -35,6 +35,8 @@ public interface PermissionMapper {
 
 	void updatePermission(Permission permission);
 
+	void deletePermission(Long id);
+
 	
 	
 	

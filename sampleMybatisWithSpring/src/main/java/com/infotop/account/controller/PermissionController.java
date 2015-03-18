@@ -114,5 +114,20 @@ public class PermissionController extends BasicController{
 		msg.setData(permission);
 		return msg;
 	}
+	
+	@RequestMapping(value = "delete", method = RequestMethod.POST)
+	@ResponseBody
+	public Message delete(@RequestParam(value = "id") Long id,
+			ServletRequest request) {
+		try {
+			permissionService.deletePermission(id);
+		}catch (Exception ex) {
+			ex.printStackTrace();
+			msg.setSuccess(false);
+			msg.setMessage(ex.getMessage());
+			msg.setData("");
+		}
+		return msg;
+	}
 
 }
