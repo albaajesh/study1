@@ -39,7 +39,7 @@ public class AccountService {
 	@Resource
 	private UserMapper userMapper;
 	
-	@Resource
+	@Autowired
 	private RoleMapper roleMapper;
 	
 	@Resource

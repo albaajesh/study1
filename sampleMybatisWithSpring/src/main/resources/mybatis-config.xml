@@ -58,22 +58,30 @@
 
    <!--  <typeAliases>
         <package name="com.eliteams.quick4j.web.model"/>
-        <package name="com.eliteams.quick4j.web.enums"/>
-    </typeAliases> -->
-    <settings>
+       
+    </typeAliases>  -->
+    
+    
+   
+    
+    
+        <settings>
 		<!-- changes from the defaults -->
 		<setting name="lazyLoadingEnabled" value="false" />
 	</settings>
+	
 	<typeAliases>
+	
 		<typeAlias alias="User" type="com.infotop.account.model.User" />
 		<typeAlias alias="Role" type="com.infotop.account.model.Role" />
-		<typeAlias alias="Menu" type="com.infotop.account.model.Menu" />
 		<typeAlias alias="Permission" type="com.infotop.account.model.Permission" />
 		<typeAlias alias="Employee" type="com.infotop.account.model.Employee" />
 	</typeAliases>
+	
    <!--  <plugins>
         <plugin interceptor="com.eliteams.quick4j.core.feature.orm.mybatis.PaginationResultSetHandlerInterceptor"/>
         <plugin interceptor="com.eliteams.quick4j.core.feature.orm.mybatis.PaginationStatementHandlerInterceptor"/>
     </plugins> -->
 
 </configuration>
+	 
