@@ -10,6 +10,11 @@ import org.apache.ibatis.annotations.Param;
 
 
 
+
+
+
+
+
 import com.infotop.account.model.User;
 import com.infotop.common.PageHelper;
 
@@ -23,10 +28,10 @@ public interface UserMapper {
 	public String getUsernameById(@Param("id") int id);
 	void saveUser(User user);
 	User getUserById(@Param("id") Long id);
-	public Long getDatagridTotal(User user);
+	public Long getDatagridTotal(Map<String, Object> searchParams);
 	User getUserUpdateById(Long id);
 	void deleteUser(Long id);
-	public List<User> datagridUser(PageHelper page);
+	public List<User> datagridUser(Map<String, Object> searchParams);
 	void deleteUserRoleByUserId(Long id);
 	void insertUserRole(@Param("userId") Long id,@Param("roleId") Long roleId);
 	User getUser(String userName);

@@ -75,9 +75,9 @@ public class UserService {
 	 * @param user
 	 * @return
 	 */
-	public Long getDatagridTotal(User user) {
-		return userMapper.getDatagridTotal(user);  
-	}
+	/*public Long getDatagridTotal(User user) {
+		return userMapper.getDatagridTotal();  
+	}*/
 
 	/**
 	 * 获取用户列表

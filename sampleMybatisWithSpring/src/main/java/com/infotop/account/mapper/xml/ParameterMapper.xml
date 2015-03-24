@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infotop.account.mapper.ParameterMapper">
+		
+		<sql id="parameterColumn">id,uuid,category,subcategory,name,value,remark,short_name,sort,parent_id</sql>
+		<resultMap id="parameterResult"  type="Parameter"> 
+ 			<id property="id"  column="id"/> 
+			<result property="uuid"  column="uuid"/>
+			<result property="category"  column="category"/>
+			<result property="subcategory"  column="subcategory"/>
+			<result property="name"  column="name"/>
+			<result property="value"  column="value"/>
+			<result property="remark"  column="remark"/>
+			<result property="shortName"  column="short_name"/>
+			<result property="sort"  column="sort"/>
+			<result property="parentId"  column="parent_id"/>
+		</resultMap>
+		
+		<select id="datagridParameter" resultMap="parameterResult">
+		select <include refid="parameterColumn"/> from parameter where parent_id=#{parentId} 
+		<!-- <if test="sort != null and sort != ''">
+            order by #{sort} #{order}
+        </if>
+        <if test="page > 0">
+            limit #{start},#{end}
+        </if> -->
+	</select>
+	<select id="getParameterById" parameterType="long" resultMap="parameterResult">
+		select <include refid="parameterColumn"/> from parameter where id=#{id}
+ </select>
+  <insert id="saveParameter" parameterType="Parameter" keyProperty="id"
+		useGeneratedKeys="true">
+  INSERT INTO parameter (uuid,category,subcategory,name,value,remark,short_name,sort,parent_id) VALUES (#{uuid},#{category},#{subcategory},#{name},#{value},#{remark},#{shortName},#{sort},#{parentId})
+  </insert>
+  
+  <update id="updateParameter"  parameterType="Parameter"> 
+	UPDATE parameter SET category=#{category},subcategory=#{subcategory},name=#{name},value=#{value},remark=#{remark},short_name=#{shortName},sort=#{sort} WHERE id=#{id} 
+	</update>
+ <delete id="deleteParameter" parameterType="long">
+ DELETE parameter FROM parameter WHERE id=#{id} OR parent_id=#{id}
+ </delete>
+</mapper>

@@ -76,6 +76,7 @@
 		<typeAlias alias="Role" type="com.infotop.account.model.Role" />
 		<typeAlias alias="Permission" type="com.infotop.account.model.Permission" />
 		<typeAlias alias="Employee" type="com.infotop.account.model.Employee" />
+		<typeAlias alias="Parameter" type="com.infotop.account.model.Parameter" />
 	</typeAliases>
 	
    <!--  <plugins>

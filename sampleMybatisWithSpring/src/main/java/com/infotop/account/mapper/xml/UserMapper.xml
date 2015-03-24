@@ -60,11 +60,21 @@
 	name=#{name}
 	WHERE id=#{id} 
   </update>
- 	<select id="getDatagridTotal" resultType="long">
-		select count(1) from user where  1=1
-		<if test="name != null and name != ''">
-            and name like concat('%',#{name},'%')
-        </if>
+ 	<select id="getDatagridTotal" parameterType="map" resultType="long">
+		select count(1) from user 
+		<if test="login_name!=null and login_name!='' or name!=null and name!=''">
+		where
+		</if>
+		<if test="login_name!=null and login_name!=''">
+		 login_name like #{login_name}
+		</if>
+		 <if test="login_name!=null and login_name!='' and name!=null and name!=''">
+		 and
+		 </if>
+		<if test="name!=null and name!=''">
+		name like #{name}
+		</if>
+		 
 	</select>
 	<select id="getUserById" resultMap="userResult">
 		 SELECT
@@ -81,14 +91,26 @@
     LEFT JOIN user_role ur ON(u.id=ur.user_id)
     LEFT JOIN role r ON(r.id=ur.role_id) where u.id=#{id} 
  </select>
-	<select id="datagridUser" resultMap="userResult">
-		select id,login_name,name,register_date from user where 1=1
+	<select id="datagridUser" parameterType="map" resultMap="userResult">
+		select id,login_name,name,register_date from user 
+		<if test="login_name!=null and login_name!='' or name!=null and name!=''">
+		where
+		</if>
+		<if test="login_name!=null and login_name!=''">
+		 login_name like #{login_name}
+		</if>
+		 <if test="login_name!=null and login_name!='' and name!=null and name!=''">
+		 and
+		 </if>
+		<if test="name!=null and name!=''">
+		name like #{name}
+		</if>
 		<if test="sort != null and sort != ''">
             order by #{sort} #{order}
         </if>
-        <if test="page > 0">
+        
             limit #{start},#{end}
-        </if>
+     
 	</select>
   <resultMap id="userResult"  type="User"> 
  		<id property="id"  column="id" />

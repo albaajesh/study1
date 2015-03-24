@@ -59,7 +59,7 @@ public class RoleController extends BasicController {
 		User user = accountService.findUserByName(su.getLoginName());
 		if (user != null) {
 			dg.setTotal(accountService.getDatagridTotalForRole(role));
-			System.out.println("Size----"+accountService.getDatagridTotal(user));
+			//System.out.println("Size----"+accountService.getDatagridTotal(user));
 			List<Role> roleList = accountService.datagridRole(page);
 			dg.setRows(roleList);
 		} else {

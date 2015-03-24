@@ -17,14 +17,14 @@ img {
 					<tr>
 						<th><spring:message code="account_loginName" />:</th>
 						<td><input class="inputmiddle" type="text"
-							name="search_LIKE_loginName"
-							value="${param.search_LIKE_loginName}" id="search_LIKE_loginName" /></td>
+							name="search_login_name"
+							value="${param.search_login_name}" id="search_login_name" /></td>
 						<th><spring:message code="account_name" />:</th>
 						<td><input class="inputmiddle" type="text"
-							name="search_LIKE_name" value="${param.search_LIKE_name}"
-							id="search_LIKE_name" /></td>
+							name="search_name" value="${param.search_name}"
+							id="search_name" /></td>
 						<th>用户类型:</th>
-						<td><select id="search_EQ_userType" name="search_EQ_userType">
+						<td><select id="search_user_type" name="search_user_type">
 								<option value="">请选择</option>
 								<option value="0">市级用户</option>
 								<option value="1">帮扶组用户</option>

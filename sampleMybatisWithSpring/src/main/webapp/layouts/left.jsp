@@ -38,6 +38,12 @@
 				onclick="indexTabsAddTab('href',{title:'权限管理',url:'${ctx}/permission',iconCls:'icon-key'})">
 					<img src="${ctx}/static/js/plugins/jquery-easyui-1.3.4/themes/icons/key.png" />&nbsp;权限管理
 			</a></li>
+			<li><a data-options="plain:true" href="javascript:void(0)"
+				class="user easyui-linkbutton"
+				onclick="indexTabsAddTab('href',{title:'参数管理',url:'${ctx}/parameter',iconCls:'icon-plugin'})">
+					<img
+					src="${ctx}/static/js/plugins/jquery-easyui-1.3.4/themes/icons/plugin.png" />&nbsp;参数管理
+			</a></li>
 		</ul>
 		
 	</div>

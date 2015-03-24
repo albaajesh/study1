@@ -1,6 +1,7 @@
 package com.infotop.account.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
@@ -32,6 +33,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springside.modules.web.Servlets;
 
 import ch.qos.logback.classic.Logger;
 
@@ -65,14 +67,19 @@ public class UserController extends BasicController {
 	
 	@ResponseBody
 	@RequestMapping(value="/findList", method = RequestMethod.POST)
-	public DataGrid datagrid(PageHelper page,User user) {
+	public DataGrid datagrid(@RequestParam(value = "sort", defaultValue = "auto") String sortType,
+ 			@RequestParam(value = "order", defaultValue = "desc") String order,
+ 			@RequestParam(value = "page", defaultValue = "1") int pageNumber,
+ 			@RequestParam(value = "rows", defaultValue = ROWS) int rows,User user,ServletRequest request) {
 		DataGrid dg = new DataGrid();
 		ShiroUser su = super.getLoginUser();
 		user = accountService.findUserByName(su.getLoginName());
 		if (user != null) {
-				dg.setTotal(accountService.getDatagridTotal(user));
-				System.out.println("Size----"+accountService.getDatagridTotal(user));
-				List<User> userList = accountService.datagridUser(page);
+			Map<String, Object> searchParams = Servlets
+					.getParametersStartingWith(request, "search_");
+				dg.setTotal(accountService.getDatagridTotal(searchParams));
+				List<User> userList = accountService.datagridUser(searchParams, pageNumber,
+ 						rows, sortType, order);
 				dg.setRows(userList);
 		} else {
 			logger.log(this.getClass(),Logger.ERROR_INT,"登陆帐号无效!","",null);

@@ -2,6 +2,7 @@ package com.infotop.account.service;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -53,14 +54,18 @@ public class AccountService {
 		return roleMapper.getRole(roleName);
 	}
 	
-	public Long getDatagridTotal(User user) {
-		return userMapper.getDatagridTotal(user);  
+	public Long getDatagridTotal(Map<String, Object> searchParams) {
+		return userMapper.getDatagridTotal(searchParams);  
 	}
 	
-	public List<User> datagridUser(PageHelper page) {
-		page.setStart((page.getPage()-1)*page.getRows());
-		page.setEnd(page.getPage()*page.getRows());
-		return userMapper.datagridUser(page);  
+	public List<User> datagridUser(Map<String, Object> searchParams, int pageNumber, int rows, String sortType, String order) {
+		searchParams.put("start", (pageNumber-1)*rows);
+		searchParams.put("end", rows);
+		searchParams.put("sort", sortType);
+		searchParams.put("order", order);
+		/*page.setStart((page.getPage()-1)*page.getRows());
+		page.setEnd(page.getPage()*page.getRows());*/
+		return userMapper.datagridUser(searchParams);  
 	}
 	
 	public Long getDatagridTotalForRole(Role role) {
