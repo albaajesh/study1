@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/common/taglibs.jsp"%>
-<style type="text/css">
-<!--
+<!-- <style type="text/css">
+
 .thcls {
 	background: none repeat scroll 0 0 #DEEEF6;
 	color: #004C7C;
@@ -14,47 +14,41 @@
 .tdcls {
 	width: 60%;
 }
--->
-</style>
-<script type="text/javascript">
-	$.parser.onComplete = function() {
-		//$("#parameter_form_inputForm").validate();
-		parent.$.messager.progress('close');
 
-		$('#parameter_form_inputForm').form(
+</style> -->
+<script type="text/javascript">
+var parameter_form_inputForm_id = 'parameter_form_inputForm';
+	$.parser.onComplete = function() {
+		parent. $ .messager.progress('close');
+		$('#'+parameter_form_inputForm_id).form(
 				{
 					onSubmit : function() {
-						alert("inside");
-						parent.$.messager.progress({
+						parent. $ .messager.progress({
 							title : '提示',
 							text : '数据处理中，请稍后....'
 						});
 						var isValid = $(this).form('validate');
 						if (!isValid) {
-							parent.$.messager.progress('close');
+							parent. $ .messager.progress('close');
 						}
 						return isValid;
 					},
 					success : function(result) {
-						parent.$.messager.progress('close');
-						result = $.parseJSON(result);
+						parent. $ .messager.progress('close');
+						result = $ .parseJSON(result);
 						if (result.success) {
-							parent.$.modalDialog.openner_dataGrid.treegrid(
-									'reload', result.data.parentId);
-							parent.$.modalDialog.handler.dialog('close');
-							$.messager.show({ // show error message
+							parent. $ .modalDialog.openner_dataGrid
+									.datagrid('reload');
+							parent. $ .modalDialog.openner_dataGrid.datagrid(
+									'uncheckAll').datagrid('unselectAll')
+									.datagrid('clearSelections');
+							parent. $ .modalDialog.handler.dialog('close');
+							$ .messager.show({ // show error message
 								title : '提示',
-								msg : result.message,
-								timeout : 800,
-								showType : 'fade',
-								style : {
-									right : '',
-									top : $(window).height() / 2,
-									bottom : ''
-								}
+								msg : result.message
 							});
 						} else {
-							$.messager.alert('错误', result.message, 'error');
+							$ .messager.alert('错误', result.message, 'error');
 						}
 					}
 				});
@@ -62,7 +56,7 @@
 	};
 </script>
 
-<form id="parameter_form_inputForm" method="post" name="parameter_form_inputForm" modelAttribute="parameter" 
+<form id="parameter_form_inputForm" method="post" name="parameter_form_inputForm"  
 	action="${ctx}/parameter/${action}">
 	<input type="hidden" id="id" name="id" value="${parameter.id }" /> <input
 		type="hidden" id="uuid" name="uuid" value="${parameter.uuid }" />
@@ -112,7 +106,7 @@
 		</tr>
 		<tr style="display: none">
 			<td class="thcls">父级编号</td>
-			<td class="tdcls"><input type=text id="parentId" name="parentId"
+			<td class="tdcls"><input type="text" id="parentId" name="parentId"
 				value="${parameter.parentId }"
 				class="easyui-validatebox inputmiddle"
 				data-options="missingMessage:'父级编号不能为空.',required:true" /></td>

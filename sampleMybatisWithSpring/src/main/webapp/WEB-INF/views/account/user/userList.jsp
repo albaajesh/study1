@@ -23,14 +23,14 @@ img {
 						<td><input class="inputmiddle" type="text"
 							name="search_name" value="${param.search_name}"
 							id="search_name" /></td>
-						<th>用户类型:</th>
+						<!-- <th>用户类型:</th>
 						<td><select id="search_user_type" name="search_user_type">
 								<option value="">请选择</option>
 								<option value="0">市级用户</option>
 								<option value="1">帮扶组用户</option>
 								<option value="2">县级用户</option>
 								<option value="3">企业用户</option>
-						</select></td>
+						</select></td> -->
 						<th style="width: 20%;">&nbsp;<a href="javascript:void(0);"
 							id="user_list_searchBtn">查询</a>&nbsp;<a
 							href="javascript:void(0);" id="user_list_clearBtn">清空</a></th>

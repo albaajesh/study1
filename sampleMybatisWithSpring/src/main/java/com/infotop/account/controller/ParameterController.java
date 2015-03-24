@@ -66,6 +66,7 @@ public class ParameterController extends BasicController{
 		if (0 != pid) {
 			Parameter parent = parameterService.getParameterById(pid);
 			parameter.setCategory(parent.getCategory());
+			parameter.setParentId(pid);
 		}
 		model.addAttribute("parameter", parameter);
 		model.addAttribute("action", "add");
