@@ -63,10 +63,11 @@ public class ParameterController extends BasicController{
 	public String createForm(Model model,
 			@RequestParam(value = "pid", defaultValue = "0") Long pid) {
 		Parameter parameter = new Parameter();
+		parameter.setParentId(pid);
 		if (0 != pid) {
 			Parameter parent = parameterService.getParameterById(pid);
 			parameter.setCategory(parent.getCategory());
-			parameter.setParentId(pid);
+			
 		}
 		model.addAttribute("parameter", parameter);
 		model.addAttribute("action", "add");

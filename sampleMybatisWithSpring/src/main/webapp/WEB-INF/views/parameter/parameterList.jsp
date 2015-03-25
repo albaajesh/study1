@@ -9,12 +9,13 @@ img {
 
 <script type="text/javascript">
 //定义列表DataGrid ID
-var parameter_list_datagrid_id = 'parameter_list_dg';
+var parameter_list_datagrid_id = 'parameter_list_datagrid';
 //定义列表toolbar ID
 var parameter_list_toolbar_id = 'parameter_list_toolbar';
 //定义操作链接
 var parameter_list_DATAGRID_LOAD_URL = '${ctx}/parameter/treeList';
 var parameter_list_CREATE_URL =  '${ctx}/parameter/add';
+var parameter_list_CREATE_URL1 =  '${ctx}/parameter/create/';
 var parameter_list_UPDATE_URL =  '${ctx}/parameter/update/';
 var parameter_list_DELETE_URL =  '${ctx}/parameter/delete/';
 var parameter_list_REPORT_URL =  '${ctx}/parameter/report';
@@ -25,12 +26,12 @@ function parameter_list_actionFormatter(value,row,index){
 	var str = '';
 	str += formatString(
 			'<img onclick="parameter_list_addForm(\'{0}\',\'{1}\',\'{2}\',\'{3}\');" src="{4}" title="增加参数"/>',
-			            '增加参数',parameter_list_CREATE_URL,'parameter_form_inputForm',row.id,
+			            '增加参数',parameter_list_CREATE_URL,'parameters_form_inputForm',row.id,
 	                    '${ctx}/static/js/plugins/jquery-easyui-1.3.4/themes/icons/application_form_add.png');
 	str += '&nbsp;';
 	str += formatString(
 			'<img onclick="parameter_list_updateForm(\'{0}\',\'{1}\',\'{2}\',\'{3}\',\'{4}\');" src="{5}" title="修改参数"/>',
-	                    row.id,'修改参数',parameter_list_UPDATE_URL,'parameter_form_inputForm',index,
+	                    row.id,'修改参数',parameter_list_UPDATE_URL,'parameters_form_inputForm',index,
 	                    '${ctx}/static/js/plugins/jquery-easyui-1.3.4/themes/icons/application_form_edit.png');
 	str += '&nbsp;';
 	str += formatString('<img onclick="parameter_list_deletenode(\'{0}\',\'{1}\');" src="{2}" title="删除参数"/>',
@@ -267,17 +268,13 @@ function parameter_list_formatterVlaue(value,row,index){
 	<div data-options="fit:true,border:false" class="easyui-panel">
 		<div class="easyui-layout" data-options="fit:true">
 			<div data-options="region:'center',border:false">
-				<table id="parameter_list_dg" style="display: none;"></table>
+				<table id="parameter_list_datagrid" style="display: none;"></table>
 			</div>
 			<!--datagrid上方的工具栏-->
 			<div id="parameter_list_toolbar" style="display: none;">
-				<!-- <a href="javascript:updateForm(parameter_list_CREATE_URL,'parameter_form_inputForm',parameter_list_dg,{title:'增加参数'});" 
+				<a href="javascript:updateForm(parameter_list_CREATE_URL,'parameters_form_inputForm',parameter_list_datagrid,{title:'增加参数'});" 
 				class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:false">增加参数</a> 			
-		  	 -->
-		  	 <a
-				href="javascript:updateForm(parameter_list_CREATE_URL,'parameter_form_inputForm',parameter_list_dg,{title:'增加参数'});"
-				class="easyui-linkbutton"
-				data-options="iconCls:'icon-add',plain:false">添加</a>
+		  	
 			<!-- 	<a href="Javascript:updateForm('增加参数',parameter_list_CREATE_URL,'parameter_form_inputForm','0');"
 					class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:false">增加参数</a>  -->
 			</div>
